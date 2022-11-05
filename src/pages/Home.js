@@ -5,7 +5,7 @@ import Bills from "../components/Bills";
 
 const Home = () => {
     return (
-        <div className="row">
+        <div className="row no-gutters mt-5">
             <Airtime />
             <Bills />
         </div>
