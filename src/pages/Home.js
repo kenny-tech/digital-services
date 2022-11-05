@@ -1,18 +1,13 @@
 import React from "react";
 
+import Airtime from "../components/Airtime";
+import Bills from "../components/Bills";
+
 const Home = () => {
     return (
         <div className="row">
-            <div className="col-md-6" style={{ backgroundColor: '#ff0', height: '650px'}}>
-                <div>
-                    <h1>Buy Airtime</h1>
-                </div>
-            </div>
-            <div className="col-md-6" style={{ backgroundColor: '#B2BEB5', height: '650px'}}>
-                <div>
-                    <h1>Pay Bills</h1>
-                </div>
-            </div>
+            <Airtime />
+            <Bills />
         </div>
     )
 }

@@ -2,7 +2,7 @@ import Home from "./pages/Home";
 
 const App = () => {
   return (
-    <div className="container-fluid mt-3">
+    <div className="container-fluid">
       <Home />
     </div>
   );
