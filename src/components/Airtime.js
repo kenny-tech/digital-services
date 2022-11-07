@@ -1,5 +1,6 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
+  
 import '../css/Airtime.css';
 
 const Airtime = () => {
@@ -10,7 +11,9 @@ const Airtime = () => {
                     <img src="/airtime-recharge.jpeg" class="img-fluid rounded" alt="TV Subscription" />
                     <h2 className="text-center mt-3">Recharge Airtime</h2>
                     <p className="text-center">Top up your phone on any network</p>
-                    <button type="button" class="btn btn-primary btn-lg btn-block mb-5">Buy Now</button>
+                    <Link to="network">
+                        <button type="button" class="btn btn-success btn-lg btn-block mb-5">Buy Now</button>
+                    </Link>
                 </div>
             </div>
         </div>
