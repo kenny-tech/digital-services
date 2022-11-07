@@ -10,7 +10,7 @@ const Airtime = () => {
                     <img src="/airtime-recharge.jpeg" class="img-fluid rounded" alt="TV Subscription" />
                     <h2 className="text-center mt-3">Recharge Airtime</h2>
                     <p className="text-center">Top up your phone on any network</p>
-                    <button type="button" class="btn btn-primary btn-lg btn-block mb-5">Buy Now</button>
+                    <button type="button" class="btn btn-success btn-lg btn-block mb-5">Buy Now</button>
                 </div>
             </div>
         </div>
