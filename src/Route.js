@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import Home from './pages/Home';
 import Network from './pages/Network';
+import SelectedNetwork from './pages/SelectedNetwork';
 
 const Route = createBrowserRouter([
   {
@@ -12,6 +13,10 @@ const Route = createBrowserRouter([
   {
     path: "/network",
     element: <Network/>,
+  },
+  {
+    path: "/selected-network",
+    element: <SelectedNetwork/>,
   },
 ]);
 
