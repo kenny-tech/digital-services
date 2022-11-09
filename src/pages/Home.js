@@ -5,7 +5,7 @@ import Bills from "../components/Bills";
 
 const Home = () => {
     return (
-        <div className="container">
+        <div className="container-fluid">
             <div className="row no-gutters mt-5">
                 <Airtime />
                 <Bills />
