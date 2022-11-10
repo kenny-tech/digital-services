@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import Provider from "../components/Provider";
+import Network from "../components/Network";
 import Phone from "../components/Phone";
 
-const Network = () => {
+const Provider = () => {
     return (
         <div className="container-fluid ml-sm-3">
              <div>
@@ -17,17 +17,17 @@ const Network = () => {
                     <div className="col-12">
                         <p>Select a Network</p>
                     </div>
-                    <Link to="/selected-network" state={{ networkName: "MTN" }}>
-                        <Provider name="MTN" image="/mtn.png" />
+                    <Link to="/selected-provider" state={{ networkName: "MTN" }}>
+                        <Network name="MTN" image="/mtn.png" />
                     </Link>
-                    <Link to="/selected-network" state={{ networkName: "Airtel" }}>
-                        <Provider name="Airtel" image="/airtel.png" />
+                    <Link to="/selected-provider" state={{ networkName: "Airtel" }}>
+                        <Network name="Airtel" image="/airtel.png" />
                     </Link>
-                    <Link to="/selected-network" state={{ networkName: "Glo" }}>
-                        <Provider name="Glo" image="/glo.png" />
+                    <Link to="/selected-provider" state={{ networkName: "Glo" }}>
+                        <Network name="Glo" image="/glo.png" />
                     </Link>
-                    <Link to="/selected-network" state={{ networkName: "9Mobile" }}>
-                        <Provider name="9 Mobile" image="/9mobile.png" />
+                    <Link to="/selected-provider" state={{ networkName: "9Mobile" }}>
+                        <Network name="9 Mobile" image="/9mobile.png" />
                     </Link>
                 </div>
             </div>
@@ -35,4 +35,4 @@ const Network = () => {
     )
 }
 
-export default Network;
+export default Provider;

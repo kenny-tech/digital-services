@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import RechargeAmount from "../components/RechargeAmount";
 import Phone from "../components/Phone";
 
-const SelectedNetwork = () => {
+const SelectedProvider = () => {
 
     const location = useLocation();
     const networkName = location.state.networkName;
@@ -32,4 +32,4 @@ const SelectedNetwork = () => {
     )
 }
 
-export default SelectedNetwork;
+export default SelectedProvider;

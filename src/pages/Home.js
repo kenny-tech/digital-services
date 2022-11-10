@@ -2,10 +2,12 @@ import React from "react";
 
 import Airtime from "../components/Airtime";
 import Bills from "../components/Bills";
+import Navigation from "../components/Navigation";
 
 const Home = () => {
     return (
         <div className="container-fluid">
+            {/* <Navigation /> */}
             <div className="row no-gutters mt-5">
                 <Airtime />
                 <Bills />

@@ -2,7 +2,7 @@ import React from "react";
 
 import '../css/Network.css';
 
-const Provider = ({ name, image }) => {
+const Network = ({ name, image }) => {
     return (
         <div className="col-md-3 col-6">
             <div className="card mr-5 mb-3 bg-light border-0 networkCard">
@@ -17,4 +17,4 @@ const Provider = ({ name, image }) => {
     )
 }
 
-export default Provider;
+export default Network;
