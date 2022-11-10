@@ -2,8 +2,8 @@ import React from 'react';
 import { createBrowserRouter } from "react-router-dom";
 
 import Home from './pages/Home';
-import Network from './pages/Network';
-import SelectedNetwork from './pages/SelectedNetwork';
+import Provider from './pages/Provider';
+import SelectedProvider from './pages/SelectedProvider';
 
 const Route = createBrowserRouter([
   {
@@ -11,12 +11,12 @@ const Route = createBrowserRouter([
     element: <Home/>,
   },
   {
-    path: "/network",
-    element: <Network/>,
+    path: "/provider",
+    element: <Provider/>,
   },
   {
-    path: "/selected-network",
-    element: <SelectedNetwork/>,
+    path: "/selected-provider",
+    element: <SelectedProvider/>,
   },
 ]);
 

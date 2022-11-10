@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import '../css/Bills.css';
 
@@ -10,7 +11,9 @@ const Bills = () => {
                     <img src="/cable-tv-subscription.jpeg" class="img-fluid rounded" alt="TV Subscription" />
                     <h2 className="text-center mt-3">TV Subscription</h2>
                     <p className="text-center">Renew your TV Subscription</p>
-                    <button type="button" class="btn btn-primary btn-lg btn-block mb-5">Renew Now</button>
+                    <Link to="provider" state={{ type: "Bills" }}>
+                        <button type="button" class="btn btn-primary btn-lg btn-block mb-5">Renew Now</button>
+                    </Link>
                 </div>
             </div>
         </div>
