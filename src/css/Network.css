@@ -1,0 +1,9 @@
+.networkCard {
+    width: 12rem; 
+    height: 10rem;
+    cursor: pointer;
+}
+
+.networkCard:hover {
+    margin: -2px;
+}

@@ -1,12 +1,13 @@
-import Home from "./pages/Home";
+import React from 'react';
+import { RouterProvider } from "react-router-dom";
+
+import Route from './Route';
 
 const App = () => {
   return (
-    <div className="container-fluid">
-      <Home />
-    </div>
-  );
+    <RouterProvider router={Route} />
+  )
 }
 
+export default App; 
 
-export default App;
