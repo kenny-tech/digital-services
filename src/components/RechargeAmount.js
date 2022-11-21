@@ -9,7 +9,9 @@ const RechargeAmount = ({ network, amount, label}) => {
                         <img src={`/${network}.png`} class="img-fluid mx-auto rounded" alt={network} width={40} height={40} />
                     </div>
                     <h3 class="card-text text-center">{amount}</h3>
-                    <p className="text-center">{label}</p>
+                    {
+                        label !== '' ? <p className="text-center">{label}</p> : null
+                    }
                     <button type="button" class="btn btn-success btn-lg btn-block mb-5">Buy Now</button>
                 </div>
             </div>
