@@ -32,10 +32,10 @@ const Provider = () => {
                         <Network name="9 Mobile" image="/9mobile.png" />
                     </Link>
                     <Faq />
-                     <div className="row"> 
-                        <InfoBox title="Prompt digital delivery" content="With just a few clicks, you'll have access to your digital credit." />
-                        <InfoBox title="Excellent ratings and reviews" content="Our customers have provided us with over 1 million excellent ratings and reviews." />
-                        <InfoBox title="We are trusted, Pay safely & securely" content="Your Order gets you in seconds using your favourite payment option." />
+                     <div className="row mb-5"> 
+                        <InfoBox title="Prompt digital delivery" content="With just a few clicks, you'll have access to your digital credit." image="/fast.png" />
+                        <InfoBox title="Excellent ratings and reviews" content="Our customers have provided us with over 1 million excellent ratings and reviews." image="/five-star-rating.png" />
+                        <InfoBox title="We are trusted, Pay safely & securely" content="Your Order gets you in seconds using your favourite payment option." image="/secure.png" />
                     </div>
                 </div>) : (<div className="row no-gutters mt-5">
                     <div className="col-12">
