@@ -7,7 +7,7 @@ import Navigation from "../components/Navigation";
 const Home = () => {
     return (
         <div className="container-fluid">
-            {/* <Navigation /> */}
+            <Navigation />
             <div className="row no-gutters mt-5">
                 <Airtime />
                 <Bills />
