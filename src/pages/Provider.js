@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import Network from "../components/Network";
 import Faq from "../components/Faq";
 import InfoBox from "../components/InfoBox";
+import Navigation from "../components/Navigation";
 
 const Provider = () => {
 
@@ -13,6 +14,7 @@ const Provider = () => {
 
     return (
         <div className="container-fluid ml-sm-3">
+             <Navigation />
              <div>
                 {
                     type === 'Airtime' ? (<div className="row no-gutters mt-5">
