@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
 const Login = () => {
     return (
         <div className="container">
@@ -18,6 +20,9 @@ const Login = () => {
                                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                                <Link>
+                                    <p className="text-center mt-3 cursor-pointer">Forgot Password?</p>
+                                </Link>
                             </form>
                         </div>
                     </div>
