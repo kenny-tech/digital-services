@@ -1,10 +1,12 @@
 import React from "react";
 
 import { Link } from "react-router-dom";
+import Navigation from "../components/Navigation";
 
 const Register = () => {
     return (
-        <div className="container">
+        <div className="container-fluid">
+            <Navigation />
             <div className="row">
                 <div className="col-12 d-flex justify-content-center align-items-center mt-5">
                     <div class="card" style={{width: '24rem'}}>
