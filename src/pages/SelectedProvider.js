@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 
 import RechargeAmount from "../components/RechargeAmount";
 import RechargeNumber from "../components/RechargeNumber";
+import Navigation from "../components/Navigation";
 
 const SelectedProvider = () => {
 
@@ -11,7 +12,8 @@ const SelectedProvider = () => {
     const type = location.state.type;
 
     return (
-        <div className="container mt-5">
+        <div className="container-fluid mt-3 mb-3 ml-3 mr-3">
+            <Navigation />
             <div className="row">
                 <div className="col-md-12 mb-3">
                     <h1>{networkName}</h1>
