@@ -20,7 +20,7 @@ const Login = () => {
                                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                                <Link>
+                                <Link to="/forgot-password">
                                     <p className="text-center mt-3 cursor-pointer">Forgot Password?</p>
                                 </Link>
                                 <Link to="/register">
