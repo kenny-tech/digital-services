@@ -13,12 +13,12 @@ const Provider = () => {
     const type = location.state.type;
 
     return (
-        <div className="container-fluid ml-sm-3">
+        <div className="container-fluid">
              <Navigation />
              <div>
                 {
                     type === 'Airtime' ? (<div className="row no-gutters mt-5">
-                    <div className="col-12">
+                    <div className="col-12 ml-3">
                         <p>Select a Network</p>
                     </div>
                     <Link to="/selected-provider" state={{ networkName: "MTN", type: "Airtime" }}>
@@ -34,7 +34,7 @@ const Provider = () => {
                         <Network name="9 Mobile" image="/9mobile.png" />
                     </Link>
                     <Faq />
-                     <div className="row mb-5"> 
+                     <div className="row mb-5 ml-3"> 
                         <InfoBox title="Prompt digital delivery" content="With just a few clicks, you'll have access to your digital credit." image="/fast.png" />
                         <InfoBox title="Excellent ratings and reviews" content="Our customers have provided us with over 1 million excellent ratings and reviews." image="/five-star-rating.png" />
                         <InfoBox title="We are trusted, Pay safely & securely" content="Your Order gets you in seconds using your favourite payment option." image="/secure.png" />
