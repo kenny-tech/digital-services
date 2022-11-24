@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Swal from 'sweetalert2'
 
 import { Link } from "react-router-dom";
 import Navigation from "../components/Navigation";
@@ -12,6 +13,7 @@ const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const [nameError, setNameError] = useState('');
     const [emailError, setEmailError] = useState('');
@@ -23,7 +25,7 @@ const Register = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        
+
         if (name.length === 0) {
             setNameError('Name is required');
         } else if(email.length === 0) {
@@ -39,6 +41,8 @@ const Register = () => {
         } else if(password !== confirmPassword ) {
             setConfirmPasswordError('Password and Confirm Password must match');
         } else {
+            setLoading(true);
+
             let data = {
                 name: name,
                 email: email,
@@ -49,7 +53,11 @@ const Register = () => {
             axios.post(`${BASE_API_ROUTE}${REGISTER_API_ROUTE}`, data)
               .then(function (response) {
                 console.log(response);
-                alert('Registration successful. Please check your email for instruction on how to activate your account.');
+                Swal.fire(
+                    'Good job!',
+                    'Registration successful! An activation link has been sent to your email. Please click on the link to activate your account.',
+                    'success'
+                  )
               })
               .catch(function (error) {
                 // console.log('error: ',error.response.data.errors)
@@ -98,7 +106,10 @@ const Register = () => {
                                     {confirmPasswordError && confirmPassword.length === 0 && <span className="text-danger">{confirmPasswordError}</span>}
                                     {confirmPasswordLenghError && confirmPassword.length < 6 && <span className="text-danger">{confirmPasswordLenghError}</span>}
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                                {
+                                    loading ? (<button type="submit" disabled={true} class="btn btn-primary btn-block">Submitting...</button>) : (<button type="submit" class="btn btn-primary btn-block">Submit</button>)
+                                }
+                                
                                 <Link to="/login">
                                     <p className="text-center mt-3 cursor-pointer">Already have an account? Login</p>
                                 </Link>
