@@ -8,7 +8,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
 
-const Route = createBrowserRouter([
+export const Route = createBrowserRouter([
   {
     path: "/",
     element: <Home/>,
@@ -35,4 +35,5 @@ const Route = createBrowserRouter([
   },
 ]);
 
-export default Route
+export const BASE_API_ROUTE = 'http://localhost:8000/api/';
+export const REGISTER_API_ROUTE = 'register';
