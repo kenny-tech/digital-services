@@ -19,10 +19,12 @@ const ActivateAccount = () => {
         axios.get(`${BASE_API_ROUTE}${ACTIVATE_ACCOUNT_API_ROUTE}/${id}/${token}`)
         .then(function (response) {
         //   console.log('active: ',response.data.data.active);
-          if(response.data.data.active) {
+        console.log('active: ',response.data);
+
+          if(response.data.success === true) {
               Swal.fire(
                   'Good job!',
-                  'Account successfully activated. You can now login',
+                  response.data.message,
                   'success'
                 ).then((result) => {
                     if (result.isConfirmed) {
