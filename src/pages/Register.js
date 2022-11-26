@@ -52,7 +52,6 @@ const Register = () => {
 
             axios.post(`${BASE_API_ROUTE}${REGISTER_API_ROUTE}`, data)
               .then(function (response) {
-                console.log(response);
                 Swal.fire(
                     'Good job!',
                     'Registration successful! An activation link has been sent to your email. Please click on the link to activate your account.',
@@ -60,7 +59,6 @@ const Register = () => {
                   )
               })
               .catch(function (error) {
-                // console.log('error: ',error.response.data.errors)
                 setErrors(error.response.data.errors);
               });
        }
