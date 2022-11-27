@@ -1,7 +1,7 @@
 import React from 'react';
 import { RouterProvider } from "react-router-dom";
 
-import Route from './Route';
+import { Route } from './Route';
 
 const App = () => {
   return (
