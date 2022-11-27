@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 
 import RechargeAmount from "../components/RechargeAmount";
 import RechargeNumber from "../components/RechargeNumber";
+import Navigation from "../components/Navigation";
 
 const SelectedProvider = () => {
 
@@ -11,45 +12,49 @@ const SelectedProvider = () => {
     const type = location.state.type;
 
     return (
-        <div className="container mt-5">
+        <div className="container-fluid mt-3 mb-3">
+            <Navigation />
+            <br/>
             <div className="row">
-                <div className="col-md-12 mb-3">
+                <div className="col-md-12 mb-3 ml-3">
                     <h1>{networkName}</h1>
                 </div>
-                <div className="col-12 mb-3">
+                <div className="col-12 mb-3 ml-3">
                     {
                         type === 'Airtime' ? (<RechargeNumber label="Phone Number" placeHolder="Enter phone number to recharge"/>) : (<RechargeNumber label="Smart Card Number" placeHolder="Enter smart card number"/>)
                     }
                 </div>
-                {
-                    type === 'Airtime' ? (<><RechargeAmount network={networkName} amount="NGN100" />
-                    <RechargeAmount network={networkName} amount="NGN200" label="" />
-                    <RechargeAmount network={networkName} amount="NGN500" label="" />
-                    <RechargeAmount network={networkName} amount="NGN1000" label="" />
-                    <RechargeAmount network={networkName} amount="NGN1,500" label="" />
-                    <RechargeAmount network={networkName} amount="NGN2,500" label="" />
-                    <RechargeAmount network={networkName} amount="NGN3,000" label="" />
-                    <RechargeAmount network={networkName} amount="NGN4,000" label="" />
-                    <RechargeAmount network={networkName} amount="NGN5,000" label="" /></>) : null
-                }
+                <div className="row ml-3">
+                    {
+                        type === 'Airtime' ? (<><RechargeAmount network={networkName} amount="NGN100" />
+                        <RechargeAmount network={networkName} amount="NGN200" label="" />
+                        <RechargeAmount network={networkName} amount="NGN500" label="" />
+                        <RechargeAmount network={networkName} amount="NGN1000" label="" />
+                        <RechargeAmount network={networkName} amount="NGN1,500" label="" />
+                        <RechargeAmount network={networkName} amount="NGN2,500" label="" />
+                        <RechargeAmount network={networkName} amount="NGN3,000" label="" />
+                        <RechargeAmount network={networkName} amount="NGN4,000" label="" />
+                        <RechargeAmount network={networkName} amount="NGN5,000" label="" /></>) : null
+                    }
 
-                {
-                    type === 'Bills' && networkName === 'DSTV' ? (<><RechargeAmount network={networkName} amount="NGN1000" label="DSTV Starter" />
-                    <RechargeAmount network={networkName} amount="NGN2,000" label="DSTV Standard" />
-                    <RechargeAmount network={networkName} amount="NGN3,000" label="DSTV Pro" />
-                    <RechargeAmount network={networkName} amount="NGN4,000" label="DSTV Super" />
-                    <RechargeAmount network={networkName} amount="NGN5,000" label="DSTV Classic" />
-                    <RechargeAmount network={networkName} amount="NGN6,000" label="DSTV Premium" /></>) : null
-                }
+                    {
+                        type === 'Bills' && networkName === 'DSTV' ? (<><RechargeAmount network={networkName} amount="NGN1000" label="DSTV Starter" />
+                        <RechargeAmount network={networkName} amount="NGN2,000" label="DSTV Standard" />
+                        <RechargeAmount network={networkName} amount="NGN3,000" label="DSTV Pro" />
+                        <RechargeAmount network={networkName} amount="NGN4,000" label="DSTV Super" />
+                        <RechargeAmount network={networkName} amount="NGN5,000" label="DSTV Classic" />
+                        <RechargeAmount network={networkName} amount="NGN6,000" label="DSTV Premium" /></>) : null
+                    }
 
-                {
-                    type === 'Bills' && networkName === 'GoTv' ? (<><RechargeAmount network={networkName} amount="NGN1000" label="GoTV Starter" />
-                    <RechargeAmount network={networkName} amount="NGN1000" label="GoTV Standard" />
-                    <RechargeAmount network={networkName} amount="NGN2000" label="GoTV Jolly"/>
-                    <RechargeAmount network={networkName} amount="NGN3000" label="GoTV Plus"/>
-                    <RechargeAmount network={networkName} amount="NGN4,000" label="GoTV Pro"/>
-                    <RechargeAmount network={networkName} amount="NGN5,000" label="GoTV Premium"/></>) : null
-                }
+                    {
+                        type === 'Bills' && networkName === 'GoTv' ? (<><RechargeAmount network={networkName} amount="NGN1000" label="GoTV Starter" />
+                        <RechargeAmount network={networkName} amount="NGN1000" label="GoTV Standard" />
+                        <RechargeAmount network={networkName} amount="NGN2000" label="GoTV Jolly"/>
+                        <RechargeAmount network={networkName} amount="NGN3000" label="GoTV Plus"/>
+                        <RechargeAmount network={networkName} amount="NGN4,000" label="GoTV Pro"/>
+                        <RechargeAmount network={networkName} amount="NGN5,000" label="GoTV Premium"/></>) : null
+                    }
+                </div>
             </div>
         </div>
     )
