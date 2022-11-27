@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Swal from 'sweetalert2';
+import { Link } from "react-router-dom";
 
 import Navigation from "../components/Navigation";
-import Error from "../components/Error";
 import { BASE_API_ROUTE, VERIFY_EMAIL_RESET_PASSWORD_API_ROUTE, RESET_PASSWORD_API_ROUTE } from "../Route";
+import Error from "../components/Error";
 
 const ResetPassword = () => {
 
@@ -18,6 +19,8 @@ const ResetPassword = () => {
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [passwordLenghError, setPasswordLengthError] = useState('');
     const [confirmPasswordLenghError, setConfirmPasswordLengthError] = useState('');
+    const [passwordMatchError, setPasswordMatchError] = useState('');
+
     const [errors, setErrors] = useState('');
 
     useEffect(() => {
@@ -28,12 +31,12 @@ const ResetPassword = () => {
         axios.get(`${BASE_API_ROUTE}${VERIFY_EMAIL_RESET_PASSWORD_API_ROUTE}/${id}/${token}`)
         .then(function (response) {
           if(response.data.success === true) {
-              console.log(response.data.data.email);
+            //   console.log(response.data.data.email);
               setEmail(response.data.data.email);
           } else {
             Swal.fire(
                 'Error!',
-                'Invalid link. Please click on the Forgot Password link and try again.',
+                'Expired link. Please try resetting your password again.',
                 'error'
               )
           }
@@ -54,8 +57,8 @@ const ResetPassword = () => {
             setConfirmPasswordError('Confirm Password is required');
         }  else if(confirmPassword.length < 6) {
             setConfirmPasswordLengthError('Confirm Password length must be 6 characters or more');
-        } else if(password !== confirmPassword ) {
-            setConfirmPasswordError('Password and Confirm Password must match');
+        }  else if(password !== confirmPassword ) {
+            setPasswordMatchError('Password and Confirm Password must match');
         } else {
             setLoading(true);
 
@@ -64,8 +67,6 @@ const ResetPassword = () => {
                 password: password,
                 confirm_password: confirmPassword
             }
-
-            console.log(data);
 
             axios.post(`${BASE_API_ROUTE}${RESET_PASSWORD_API_ROUTE}`, data)
               .then(function (response) {
@@ -88,7 +89,7 @@ const ResetPassword = () => {
                     }          
                 })
               .catch(function (error) {
-                // console.log(error.response);
+                setLoading(false);
                 setErrors(error.response.data.errors);
             });
        }
@@ -111,7 +112,14 @@ const ResetPassword = () => {
                                 ))}
                             </ul>
                             {
-                                email !== '' ? ( <form onSubmit={handleSubmit}>
+                                email === '' ? (<div><p>The link you clicked has expired. <br/><br/>Please click on Forgot Password link below to reset your password.</p>
+                                <Link to="/forgot-password">
+                                    <p className="text-center mt-3 cursor-pointer">Forgot Password?</p>
+                                </Link></div>) : null
+                            }
+                            {
+                                email !== '' ? ( 
+                                <form onSubmit={handleSubmit}>
                                     <div className="form-group">
                                         <label for="exampleInputPassword1">Password</label>
                                         <input type="password" className="form-control" placeholder="Password" name="password" onChange={event => setPassword(event.target.value)} value={password} />
@@ -121,8 +129,9 @@ const ResetPassword = () => {
                                     <div className="form-group">
                                         <label for="exampleInputPassword1">Confirm Password</label>
                                         <input type="password" className="form-control" placeholder="Confirm Password" name="confirm_password" onChange={event => setConfirmPassword(event.target.value)} value={confirmPassword} />
-                                        {confirmPasswordError && confirmPassword.length === 0 && <span className="text-danger">{confirmPasswordError}</span>}
+                                        {confirmPasswordError && confirmPassword.length === 0 && <span className="text-danger">{confirmPasswordError}<br/></span>}
                                         {confirmPasswordLenghError && confirmPassword.length < 6 && <span className="text-danger">{confirmPasswordLenghError}</span>}
+                                        {passwordMatchError && password !== confirmPassword && <span className="text-danger">{passwordMatchError}<br/></span>}
                                     </div>
                                     {
                                         loading ? (<button type="submit" disabled={true} class="btn btn-primary btn-block">Submitting...</button>) : (<button type="submit" class="btn btn-primary btn-block">Submit</button>)
