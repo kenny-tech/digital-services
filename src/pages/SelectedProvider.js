@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
 
-import RechargeNumber from "../components/RechargeNumber";
 import Navigation from "../components/Navigation";
 
 const SelectedProvider = () => {
@@ -29,7 +29,7 @@ const SelectedProvider = () => {
         },
         {
             "id": 5,
-            "amount": 200
+            "amount": 2000
         },
         {
             "id": 6,
@@ -103,12 +103,41 @@ const SelectedProvider = () => {
         },
     ]
 
-    const [amount, setAmount] = useState(0);
+    const [amountSelected, setAmountSelected] = useState(0);
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [smartCardNo, setSmartCardNo] = useState('');
 
-    const handleBuyNow = (amount) => {
-        setAmount(amount);
-        alert(amount);
+    const handleBuyNow = (amountToRecharge) => {
+        setAmountSelected(amountToRecharge);
+        // alert(amount);
+        handleFlutterPayment({
+            callback: (response) => {
+            console.log(response);
+                closePaymentModal() // this will close the modal programmatically
+            },
+            onClose: () => {},
+        });
     }
+
+    const config = {
+        public_key: 'FLWPUBK_TEST-X',
+        tx_ref: Date.now(),
+        amount: amountSelected,
+        currency: 'NGN',
+        payment_options: 'card,mobilemoney,ussd',
+        customer: {
+          email: 'user@gmail.com',
+          phone_number: phoneNumber,
+          name: 'john doe',
+        },
+        customizations: {
+          title: 'my Payment Title',
+          description: 'Payment for items in cart',
+          logo: 'https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg',
+        },
+    };
+    
+    const handleFlutterPayment = useFlutterwave(config);
 
     return (
         <div className="container-fluid mt-3 mb-3">
@@ -120,7 +149,13 @@ const SelectedProvider = () => {
                 </div>
                 <div className="col-12 mb-3 ml-3">
                     {
-                        type === 'Airtime' ? (<RechargeNumber label="Phone Number" placeHolder="Enter phone number to recharge"/>) : (<RechargeNumber label="Smart Card Number" placeHolder="Enter smart card number"/>)
+                        type === 'Airtime' ? ( <div class="form-group">
+                        <label for="phone">{'Phone Number'}</label>
+                        <input type="text" max={11} class="form-control" style={{width: '70%'}} id="phone" placeholder={'Enter phone number to recharge'} onChange={e => setPhoneNumber(e.target.value)} />
+                    </div>) : ( <div class="form-group">
+                        <label for="phone">{'Enter Smart Card Number'}</label>
+                        <input type="text" max={11} class="form-control" style={{width: '70%'}} id="phone" placeholder={'Smart Card Number'} onChange={e => setSmartCardNo(e.target.value)} />
+                    </div>)
                     }
                 </div>
                 
@@ -142,6 +177,20 @@ const SelectedProvider = () => {
                                                         <p className="text-center"></p>
                                                     }
                                                     <button type="button" class="btn btn-success btn-lg btn-block mb-5" onClick={() => handleBuyNow(item.amount)}>Buy Now</button>
+                                                    {/* <button
+                                                        onClick={() => {
+                                                        handleFlutterPayment({
+                                                            callback: (response) => {
+                                                            console.log(response);
+                                                                closePaymentModal() // this will close the modal programmatically
+                                                            },
+                                                            onClose: () => {},
+                                                        });
+                                                        }}
+                                                        class="btn btn-success btn-lg btn-block mb-5"
+                                                    >
+                                                        Buy Now
+                                                    </button> */}
                                                 </div>
                                             </div>
                                         </div>
