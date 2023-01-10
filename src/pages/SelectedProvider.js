@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
 
 import Navigation from "../components/Navigation";
+import FlutterwavePayment from "../components/FlutterwavePayment"
 
 const SelectedProvider = () => {
 
@@ -108,6 +109,7 @@ const SelectedProvider = () => {
     const [smartCardNo, setSmartCardNo] = useState('');
 
     const handleBuyNow = (amountToRecharge) => {
+        alert(amountToRecharge)
         setAmountSelected(amountToRecharge);
         // alert(amount);
         handleFlutterPayment({
@@ -120,7 +122,7 @@ const SelectedProvider = () => {
     }
 
     const config = {
-        public_key: 'FLWPUBK_TEST-X',
+        public_key: 'FLWPUBK_TEST-58e3361d41799afe58295ffc9c12dbf3-X',
         tx_ref: Date.now(),
         amount: amountSelected,
         currency: 'NGN',
@@ -176,7 +178,8 @@ const SelectedProvider = () => {
                                                     {
                                                         <p className="text-center"></p>
                                                     }
-                                                    <button type="button" class="btn btn-success btn-lg btn-block mb-5" onClick={() => handleBuyNow(item.amount)}>Buy Now</button>
+                                                    <FlutterwavePayment amount={item.amount} phoneNumber={phoneNumber} />
+                                                    {/* <button type="button" class="btn btn-success btn-lg btn-block mb-5" onClick={() => handleBuyNow(item.amount)}>Buy Now</button> */}
                                                     {/* <button
                                                         onClick={() => {
                                                         handleFlutterPayment({
