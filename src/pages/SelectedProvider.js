@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
 
 import Navigation from "../components/Navigation";
 import FlutterwavePayment from "../components/FlutterwavePayment"
@@ -104,43 +103,9 @@ const SelectedProvider = () => {
         },
     ]
 
-    const [amountSelected, setAmountSelected] = useState(0);
     const [phoneNumber, setPhoneNumber] = useState('');
     const [smartCardNo, setSmartCardNo] = useState('');
-
-    const handleBuyNow = (amountToRecharge) => {
-        alert(amountToRecharge)
-        setAmountSelected(amountToRecharge);
-        // alert(amount);
-        handleFlutterPayment({
-            callback: (response) => {
-            console.log(response);
-                closePaymentModal() // this will close the modal programmatically
-            },
-            onClose: () => {},
-        });
-    }
-
-    const config = {
-        public_key: 'FLWPUBK_TEST-58e3361d41799afe58295ffc9c12dbf3-X',
-        tx_ref: Date.now(),
-        amount: amountSelected,
-        currency: 'NGN',
-        payment_options: 'card,mobilemoney,ussd',
-        customer: {
-          email: 'user@gmail.com',
-          phone_number: phoneNumber,
-          name: 'john doe',
-        },
-        customizations: {
-          title: 'my Payment Title',
-          description: 'Payment for items in cart',
-          logo: 'https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg',
-        },
-    };
     
-    const handleFlutterPayment = useFlutterwave(config);
-
     return (
         <div className="container-fluid mt-3 mb-3">
             <Navigation />
@@ -178,22 +143,7 @@ const SelectedProvider = () => {
                                                     {
                                                         <p className="text-center"></p>
                                                     }
-                                                    <FlutterwavePayment amount={item.amount} phoneNumber={phoneNumber} />
-                                                    {/* <button type="button" class="btn btn-success btn-lg btn-block mb-5" onClick={() => handleBuyNow(item.amount)}>Buy Now</button> */}
-                                                    {/* <button
-                                                        onClick={() => {
-                                                        handleFlutterPayment({
-                                                            callback: (response) => {
-                                                            console.log(response);
-                                                                closePaymentModal() // this will close the modal programmatically
-                                                            },
-                                                            onClose: () => {},
-                                                        });
-                                                        }}
-                                                        class="btn btn-success btn-lg btn-block mb-5"
-                                                    >
-                                                        Buy Now
-                                                    </button> */}
+                                                    <FlutterwavePayment amount={item.amount} phoneNumber={phoneNumber} title={'Buy Airtime'} description={'Payment for Airtime'} />
                                                 </div>
                                             </div>
                                         </div>
@@ -218,7 +168,6 @@ const SelectedProvider = () => {
                                                     {
                                                         <p className="text-center">{item.label}</p>
                                                     }
-                                                    <button type="button" class="btn btn-success btn-lg btn-block mb-5" onClick={() => handleBuyNow(item.amount)}>Buy Now</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -244,7 +193,6 @@ const SelectedProvider = () => {
                                                     {
                                                         <p className="text-center">{item.label}</p>
                                                     }
-                                                    <button type="button" class="btn btn-success btn-lg btn-block mb-5" onClick={() => handleBuyNow(item.amount)}>Buy Now</button>
                                                 </div>
                                             </div>
                                         </div>

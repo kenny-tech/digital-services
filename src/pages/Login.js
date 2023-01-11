@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Swal from 'sweetalert2';
-
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 import Navigation from "../components/Navigation";
 import { BASE_API_ROUTE, LOGIN_API_ROUTE } from "../Route";
 
 const Login = () => {
+
+    const navigate = useNavigate()
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -32,13 +35,18 @@ const Login = () => {
 
             axios.post(`${BASE_API_ROUTE}${LOGIN_API_ROUTE}`, data)
               .then(function (response) {
+                console.log(response);
                 if(response.data.success === true) {
                     localStorage.setItem('token',  response.data.data.token);
-                    Swal.fire(
-                        'Good job!',
-                        'Login successful!',
-                        'success'
-                      )                
+                    localStorage.setItem('name',  response.data.data.name);
+                    localStorage.setItem('email',  response.data.data.email);
+                    localStorage.setItem('user_id',  response.data.data.user_id);
+                    // Swal.fire(
+                    //     'Good job!',
+                    //     'Login successful!',
+                    //     'success'
+                    // )   
+                    navigate('/');
                 } else {
                     setError('Invalid login details.')
                 }      
@@ -50,7 +58,6 @@ const Login = () => {
        }
 
     }
-
 
     return (
         <div className="container-fluid">

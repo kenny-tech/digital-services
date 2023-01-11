@@ -11,9 +11,13 @@ const Airtime = () => {
                     <img src="/airtime-recharge.jpeg" class="img-fluid rounded" alt="Airtime" />
                     <h2 className="text-center mt-3">Recharge Airtime</h2>
                     <p className="text-center">Top up your phone on any network</p>
-                    <Link to="provider" state={{ type: "Airtime" }}>
+                    {
+                        localStorage.getItem('token') !== null ? ( <Link to="provider" state={{ type: "Airtime" }}>
                         <button type="button" class="btn btn-success btn-lg btn-block mb-5">Buy Now</button>
-                    </Link>
+                    </Link>) : (<Link to="login">
+                        <button type="button" class="btn btn-success btn-lg btn-block mb-5">Buy Now</button>
+                    </Link>)
+                    }
                 </div>
             </div>
         </div>
