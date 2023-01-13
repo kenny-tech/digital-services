@@ -32,7 +32,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
         if(phoneNumber.length === 0) {
             alert('Phone number cannot be blank and must be 11 characters.');
             navigate(0);
-        }
+        } 
        
         handleFlutterPayment({
             callback: (response) => {
