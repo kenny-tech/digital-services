@@ -35,7 +35,7 @@ const Login = () => {
 
             axios.post(`${BASE_API_ROUTE}${LOGIN_API_ROUTE}`, data)
               .then(function (response) {
-                console.log(response);
+                // console.log(response);
                 if(response.data.success === true) {
                     localStorage.setItem('token',  response.data.data.token);
                     localStorage.setItem('name',  response.data.data.name);

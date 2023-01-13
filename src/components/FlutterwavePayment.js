@@ -2,8 +2,12 @@ import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
 import { BASE_API_ROUTE, MAKE_PAYMENT_API_ROUTE } from "../Route";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardNo}) => {
+
+    const navigate = useNavigate();
+
     const config = {
         public_key: 'FLWPUBK_TEST-58e3361d41799afe58295ffc9c12dbf3-X',
         tx_ref: Date.now(),
@@ -25,6 +29,10 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
     const handleFlutterPayment = useFlutterwave(config);
 
     const handleBuyNow = () => {
+        if(phoneNumber.length === 0) {
+            alert('Phone number cannot be blank and must be 11 characters.');
+            navigate(0);
+        }
        
         handleFlutterPayment({
             callback: (response) => {
@@ -62,6 +70,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
                         }      
                     })
                     .catch(function (error) {
+                        console.log('Error: ',error);
                         Swal.fire(
                             'Error!',
                             error.response.data.message,

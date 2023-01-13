@@ -118,10 +118,10 @@ const SelectedProvider = () => {
                     {
                         type === 'Airtime' ? ( <div class="form-group">
                         <label for="phone">{'Phone Number'}</label>
-                        <input type="text" max={11} class="form-control" style={{width: '70%'}} id="phone" placeholder={'Phone number'} onChange={e => setPhoneNumber(e.target.value)} />
+                        <input type="number" max={11} class="form-control" style={{width: '70%'}} id="phone" placeholder={'Phone number'} onChange={e => setPhoneNumber(e.target.value)} required={true}/>
                     </div>) : ( <div class="form-group">
                         <label for="phone">{'Enter Smart Card Number'}</label>
-                        <input type="text" max={11} class="form-control" style={{width: '70%'}} id="phone" placeholder={'Smart Card Number'} onChange={e => setSmartCardNo(e.target.value)} />
+                        <input type="number" max={11} class="form-control" style={{width: '70%'}} id="phone" placeholder={'Smart Card Number'} onChange={e => setSmartCardNo(e.target.value)} required={true}/>
                     </div>)
                     }
                 </div>
