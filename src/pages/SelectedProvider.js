@@ -118,7 +118,7 @@ const SelectedProvider = () => {
                     {
                         type === 'Airtime' ? ( <div class="form-group">
                         <label for="phone">{'Phone Number'}</label>
-                        <input type="text" max={11} class="form-control" style={{width: '70%'}} id="phone" placeholder={'Enter phone number to recharge'} onChange={e => setPhoneNumber(e.target.value)} />
+                        <input type="text" max={11} class="form-control" style={{width: '70%'}} id="phone" placeholder={'Phone number'} onChange={e => setPhoneNumber(e.target.value)} />
                     </div>) : ( <div class="form-group">
                         <label for="phone">{'Enter Smart Card Number'}</label>
                         <input type="text" max={11} class="form-control" style={{width: '70%'}} id="phone" placeholder={'Smart Card Number'} onChange={e => setSmartCardNo(e.target.value)} />
@@ -143,7 +143,7 @@ const SelectedProvider = () => {
                                                     {
                                                         <p className="text-center"></p>
                                                     }
-                                                    <FlutterwavePayment amount={item.amount} phoneNumber={phoneNumber} title={'Buy Airtime'} description={'Payment for Airtime'} />
+                                                    <FlutterwavePayment amount={item.amount} phoneNumber={phoneNumber} smartCardNo={''} title={'Buy Airtime'} description={'Payment for Airtime'} />
                                                 </div>
                                             </div>
                                         </div>
@@ -168,6 +168,7 @@ const SelectedProvider = () => {
                                                     {
                                                         <p className="text-center">{item.label}</p>
                                                     }
+                                                    <FlutterwavePayment amount={item.amount} phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Bills'} description={'Payment for Bills'} />
                                                 </div>
                                             </div>
                                         </div>
@@ -193,6 +194,7 @@ const SelectedProvider = () => {
                                                     {
                                                         <p className="text-center">{item.label}</p>
                                                     }
+                                                    <FlutterwavePayment amount={item.amount} phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Bills'} description={'Payment for Bills'} />
                                                 </div>
                                             </div>
                                         </div>
