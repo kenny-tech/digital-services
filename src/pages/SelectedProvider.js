@@ -116,12 +116,12 @@ const SelectedProvider = () => {
                 </div>
                 <div className="col-12 mb-3 ml-3">
                     {
-                        type === 'Airtime' ? ( <div class="form-group">
+                        type === 'Airtime' ? ( <div className="form-group">
                         <label for="phone">{'Phone Number'}</label>
-                        <input type="number" max={11} class="form-control" style={{width: '70%'}} id="phone" placeholder={'Phone number'} onChange={e => setPhoneNumber(e.target.value)} required={true}/>
-                    </div>) : ( <div class="form-group">
+                        <input type="number" max={11} className="form-control" style={{width: '70%'}} id="phone" placeholder={'Phone number'} onChange={e => setPhoneNumber(e.target.value)} required={true}/>
+                    </div>) : ( <div className="form-group">
                         <label for="phone">{'Enter Smart Card Number'}</label>
-                        <input type="number" max={11} class="form-control" style={{width: '70%'}} id="phone" placeholder={'Smart Card Number'} onChange={e => setSmartCardNo(e.target.value)} required={true}/>
+                        <input type="number" max={11} className="form-control" style={{width: '70%'}} id="phone" placeholder={'Smart Card Number'} onChange={e => setSmartCardNo(e.target.value)} required={true}/>
                     </div>)
                     }
                 </div>
@@ -134,12 +134,12 @@ const SelectedProvider = () => {
                                 rechargeAmount.map(item => {
                                     return (
                                         <div className="col-md-4 mb-3">
-                                            <div class="card bg-light" style={{width: '22rem', height: '13rem'}}>
-                                                <div class="card-body">
+                                            <div className="card bg-light" style={{width: '22rem', height: '13rem'}}>
+                                                <div className="card-body">
                                                     <div className="d-flex justify-content-center mb-1">
-                                                        <img src={`/${networkName}.png`} class="img-fluid mx-auto rounded" alt={item.networkName} width={40} height={40} />
+                                                        <img src={`/${networkName}.png`} className="img-fluid mx-auto rounded" alt={item.networkName} width={40} height={40} />
                                                     </div>
-                                                    <h3 class="card-text text-center">NGN{item.amount.toLocaleString()}</h3>
+                                                    <h3 className="card-text text-center">NGN{item.amount.toLocaleString()}</h3>
                                                     {
                                                         <p className="text-center"></p>
                                                     }
@@ -159,12 +159,12 @@ const SelectedProvider = () => {
                                 dstvBillsAmount.map(item => {
                                     return (
                                         <div className="col-md-4 mb-3">
-                                            <div class="card bg-light" style={{width: '22rem', height: '13rem'}}>
-                                                <div class="card-body">
+                                            <div className="card bg-light" style={{width: '22rem', height: '13rem'}}>
+                                                <div className="card-body">
                                                     <div className="d-flex justify-content-center mb-1">
-                                                        <img src={`/${networkName}.png`} class="img-fluid mx-auto rounded" alt={item.networkName} width={40} height={40} />
+                                                        <img src={`/${networkName}.png`} className="img-fluid mx-auto rounded" alt={item.networkName} width={40} height={40} />
                                                     </div>
-                                                    <h3 class="card-text text-center">NGN{item.amount.toLocaleString()}</h3>
+                                                    <h3 className="card-text text-center">NGN{item.amount.toLocaleString()}</h3>
                                                     {
                                                         <p className="text-center">{item.label}</p>
                                                     }
@@ -185,12 +185,12 @@ const SelectedProvider = () => {
                                 gotvBillsAmount.map(item => {
                                     return (
                                         <div className="col-md-4 mb-3">
-                                            <div class="card bg-light" style={{width: '22rem', height: '13rem'}}>
-                                                <div class="card-body">
+                                            <div className="card bg-light" style={{width: '22rem', height: '13rem'}}>
+                                                <div className="card-body">
                                                     <div className="d-flex justify-content-center mb-1">
-                                                        <img src={`/${networkName}.png`} class="img-fluid mx-auto rounded" alt={item.networkName} width={40} height={40} />
+                                                        <img src={`/${networkName}.png`} className="img-fluid mx-auto rounded" alt={item.networkName} width={40} height={40} />
                                                     </div>
-                                                    <h3 class="card-text text-center">NGN{item.amount.toLocaleString()}</h3>
+                                                    <h3 className="card-text text-center">NGN{item.amount.toLocaleString()}</h3>
                                                     {
                                                         <p className="text-center">{item.label}</p>
                                                     }

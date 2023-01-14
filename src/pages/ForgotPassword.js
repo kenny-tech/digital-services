@@ -50,20 +50,20 @@ const ForgotPassword = () => {
             <Navigation />
             <div className="row">
                 <div className="col-12 d-flex justify-content-center align-items-center mt-5">
-                    <div class="card" style={{width: '24rem'}}>
-                        <div class="card-body">
-                            <h5 class="card-title">Forgot Password</h5>
+                    <div className="card" style={{width: '24rem'}}>
+                        <div className="card-body">
+                            <h5 className="card-title">Forgot Password</h5>
                             {
                                 error !== '' ? <p className="text-danger">{error}</p> : null
                             }
                             <form onSubmit={handleSubmit}>
-                                <div class="form-group">
+                                <div className="form-group">
                                     <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" placeholder="Enter the email you used to register" onChange={event => setEmail(event.target.value)} value={email} />
+                                    <input type="email" className="form-control" placeholder="Enter the email you used to register" onChange={event => setEmail(event.target.value)} value={email} />
                                     {emailError && email.length === 0 && <span className="text-danger">{emailError}</span>}
                                 </div>
                                 {
-                                    loading ? (<button type="submit" disabled={true} class="btn btn-primary btn-block">Submitting...</button>) : (<button type="submit" className="btn btn-primary btn-block">Submit</button>)
+                                    loading ? (<button type="submit" disabled={true} className="btn btn-primary btn-block">Submitting...</button>) : (<button type="submit" className="btn btn-primary btn-block">Submit</button>)
                                 }                                   <Link to="/login">
                                 <p className="text-center mt-3 cursor-pointer">Login</p>
                                 </Link>

@@ -36,7 +36,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
        
         handleFlutterPayment({
             callback: (response) => {
-            console.log(response);
+            console.log('Payment response: ',response);
                 if(response.status === 'successful') {
                     let data = {
                         payment_title: title,
@@ -51,8 +51,17 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
                         payment_date: response.created_at,
                         phone_number: phoneNumber
                     }
+                
+                const usertoken = localStorage.getItem("token");
 
-                axios.post(`${BASE_API_ROUTE}${MAKE_PAYMENT_API_ROUTE}`, data)
+                const headers = {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${usertoken}`
+                }
+
+                axios.post(`${BASE_API_ROUTE}${MAKE_PAYMENT_API_ROUTE}`, data, {
+                    headers: headers
+                })
                     .then(function (response) {
                         console.log(response);
                         if(response.data.success === true) {
@@ -85,7 +94,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
     }
 
     return (
-        <button type="button" class="btn btn-success btn-lg btn-block mb-5" onClick={() => handleBuyNow()}>Buy Now</button>
+        <button type="button" className="btn btn-success btn-lg btn-block mb-5" onClick={() => handleBuyNow()}>Buy Now</button>
     )
 }
 

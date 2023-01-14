@@ -8,7 +8,7 @@ const Network = ({ name, image }) => {
             <div className="card mr-5 mb-3 bg-light border-0 networkCard">
                 <div className="card-body d-block justify-content-center align-items-center">
                     <div className="mx-auto text-center">
-                        <img src={image} class="img-fluid mx-auto my-auto rounded" alt="" />
+                        <img src={image} className="img-fluid mx-auto my-auto rounded" alt="" />
                         <h6 className="text-center mt-2">{name}</h6>
                     </div>
                 </div>

@@ -72,7 +72,7 @@ const Register = () => {
                 <div className="col-12 d-flex justify-content-center align-items-center mt-5">
                     <div className="card" style={{width: '24rem'}}>
                         <div className="card-body">
-                            <h5 class="card-title">Register</h5>
+                            <h5 className="card-title">Register</h5>
                             <ul>
                                 {Object.keys(errors).map((error, index) => (
                                     <Error
@@ -105,7 +105,7 @@ const Register = () => {
                                     {confirmPasswordLenghError && confirmPassword.length < 6 && <span className="text-danger">{confirmPasswordLenghError}</span>}
                                 </div>
                                 {
-                                    loading ? (<button type="submit" disabled={true} class="btn btn-primary btn-block">Submitting...</button>) : (<button type="submit" class="btn btn-primary btn-block">Submit</button>)
+                                    loading ? (<button type="submit" disabled={true} className="btn btn-primary btn-block">Submitting...</button>) : (<button type="submit" className="btn btn-primary btn-block">Submit</button>)
                                 }
                                 
                                 <Link to="/login">

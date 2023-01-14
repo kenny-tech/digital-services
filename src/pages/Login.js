@@ -64,9 +64,9 @@ const Login = () => {
             <Navigation />
             <div className="row">
                 <div className="col-12 d-flex justify-content-center align-items-center mt-5">
-                    <div class="card" style={{width: '24rem'}}>
-                        <div class="card-body">
-                            <h5 class="card-title">Login</h5>
+                    <div className="card" style={{width: '24rem'}}>
+                        <div className="card-body">
+                            <h5 className="card-title">Login</h5>
                             {
                                 error !== '' ? <p className="text-danger">{error}</p> : null
                             }
@@ -76,18 +76,18 @@ const Login = () => {
                                     <input type="email" className="form-control" placeholder="Enter email" onChange={event => setEmail(event.target.value)} value={email} />
                                     {emailError && email.length === 0 && <span className="text-danger">{emailError}</span>}
                                 </div>
-                                <div class="form-group">
+                                <div className="form-group">
                                     <label for="exampleInputPassword1">Password</label>
                                     <input type="password" className="form-control" placeholder="Password" onChange={event => setPassword(event.target.value)} value={password}/>
                                     {passwordError && password.length === 0 && <span className="text-danger">Password is required</span>}
                                 </div>
                                 {
-                                    loading ? (<button type="submit" disabled={true} class="btn btn-primary btn-block">Submitting...</button>) : (<button type="submit" className="btn btn-primary btn-block">Submit</button>)
+                                    loading ? (<button type="submit" disabled={true} className="btn btn-primary btn-block">Submitting...</button>) : (<button type="submit" className="btn btn-primary btn-block">Submit</button>)
                                 }                                <Link to="/forgot-password">
                                     <p className="text-center mt-3 cursor-pointer">Forgot Password?</p>
                                 </Link>
                                 <Link to="/register">
-                                    <p className="text-center mt-3 cursor-pointer">Don't have an account yet? Register</p>
+                                    <p className="text-center mt-3 cursor-pointer text-black-50">Don't have an account yet? Register</p>
                                 </Link>
                             </form>
                         </div>
