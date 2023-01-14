@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
 import { BASE_API_ROUTE, MAKE_PAYMENT_API_ROUTE } from "../Route";
 import axios from "axios";
@@ -7,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardNo}) => {
 
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
 
     const config = {
         public_key: 'FLWPUBK_TEST-58e3361d41799afe58295ffc9c12dbf3-X',
@@ -29,8 +31,10 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
     const handleFlutterPayment = useFlutterwave(config);
 
     const handleBuyNow = () => {
+        setLoading(true);
         if(phoneNumber.length === 0) {
             alert('Phone number cannot be blank and must be 11 characters.');
+            setLoading(false);
             navigate(0);
         } 
        
@@ -80,6 +84,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
                     })
                     .catch(function (error) {
                         console.log('Error: ',error);
+                        setLoading(false);
                         Swal.fire(
                             'Error!',
                             error.response.data.message,
@@ -94,7 +99,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
     }
 
     return (
-        <button type="button" className="btn btn-success btn-lg btn-block mb-5" onClick={() => handleBuyNow()}>Buy Now</button>
+        loading ? (<button type="button" className="btn btn-success btn-lg btn-block mb-5">Loading...</button>) : (<button type="button" className="btn btn-success btn-lg btn-block mb-5" onClick={() => handleBuyNow()}>Buy Now</button>)
     )
 }
 
