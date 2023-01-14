@@ -80,7 +80,8 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
                                 'Unable to process your payment. Please try again',
                                 'error'
                             )   
-                        }      
+                        }  
+                        setLoading(false);    
                     })
                     .catch(function (error) {
                         console.log('Error: ',error);
