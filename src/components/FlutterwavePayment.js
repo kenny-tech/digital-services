@@ -40,7 +40,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
        
         handleFlutterPayment({
             callback: (response) => {
-            console.log('Payment response: ',response);
+            // console.log('Payment response: ',response);
                 if(response.status === 'successful') {
                     let data = {
                         payment_title: title,
