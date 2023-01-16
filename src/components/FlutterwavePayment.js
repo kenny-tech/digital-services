@@ -67,24 +67,16 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
                     headers: headers
                 })
                     .then(function (response) {
-                        console.log(response);
-                        if(response.data.success === true) {
-                            Swal.fire(
-                                'Good job!',
-                                'Payment successful! The airtime has been sent to '.phoneNumber,
-                                'success'
-                            )   
-                        } else {
-                            Swal.fire(
-                                'Error!',
-                                'Unable to process your payment. Please try again',
-                                'error'
-                            )   
-                        }  
+                        // console.log(response);
+                        Swal.fire(
+                            'Airtime sent successfully.',
+                            'Payment successful!',
+                            'success'
+                        )   
                         setLoading(false);    
                     })
                     .catch(function (error) {
-                        console.log('Error: ',error);
+                        // console.log('Error: ',error);
                         setLoading(false);
                         Swal.fire(
                             'Error!',
