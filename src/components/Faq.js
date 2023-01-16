@@ -2,7 +2,7 @@ import React from "react";
 
 const Faq = () => {
     return (
-        <div className="row ml-3">
+        <div className="row ml-1">
              <div className="col-12 mt-4 mr-4 pl-3 pr-5">
                 <h3>How do I top up?</h3>
                 <p>We at Cakamba provide high-quality, efficient, and successful digital services in Nigeria. The process of topping up your account on Cakamba.com is simple. You only need to provide your email address or phone number. All the largest providers are included in our call credit facilities. Check out our call credit page for your provider. Choose your preferred payment method and select your amount of call credit and data. It will take just a few seconds for your call credit to be sent to your phone. It is ready for you to call your family and friends anywhere you are.</p>

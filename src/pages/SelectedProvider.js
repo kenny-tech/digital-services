@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 
-import RechargeNumber from "../components/RechargeNumber";
 import Navigation from "../components/Navigation";
+import FlutterwavePayment from "../components/FlutterwavePayment"
 
 const SelectedProvider = () => {
 
@@ -29,7 +29,7 @@ const SelectedProvider = () => {
         },
         {
             "id": 5,
-            "amount": 200
+            "amount": 2000
         },
         {
             "id": 6,
@@ -103,13 +103,9 @@ const SelectedProvider = () => {
         },
     ]
 
-    const [amount, setAmount] = useState(0);
-
-    const handleBuyNow = (amount) => {
-        setAmount(amount);
-        alert(amount);
-    }
-
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [smartCardNo, setSmartCardNo] = useState('');
+    
     return (
         <div className="container-fluid mt-3 mb-3">
             <Navigation />
@@ -120,7 +116,13 @@ const SelectedProvider = () => {
                 </div>
                 <div className="col-12 mb-3 ml-3">
                     {
-                        type === 'Airtime' ? (<RechargeNumber label="Phone Number" placeHolder="Enter phone number to recharge"/>) : (<RechargeNumber label="Smart Card Number" placeHolder="Enter smart card number"/>)
+                        type === 'Airtime' ? ( <div className="form-group">
+                        <label for="phone">{'Phone Number'}</label>
+                        <input type="number" max={11} className="form-control" style={{width: '70%'}} id="phone" placeholder={'Phone number'} onChange={e => setPhoneNumber(e.target.value)} required={true}/>
+                    </div>) : ( <div className="form-group">
+                        <label for="phone">{'Enter Smart Card Number'}</label>
+                        <input type="number" max={11} className="form-control" style={{width: '70%'}} id="phone" placeholder={'Smart Card Number'} onChange={e => setSmartCardNo(e.target.value)} required={true}/>
+                    </div>)
                     }
                 </div>
                 
@@ -132,16 +134,16 @@ const SelectedProvider = () => {
                                 rechargeAmount.map(item => {
                                     return (
                                         <div className="col-md-4 mb-3">
-                                            <div class="card bg-light" style={{width: '22rem', height: '13rem'}}>
-                                                <div class="card-body">
+                                            <div className="card bg-light" style={{width: '22rem', height: '13rem'}}>
+                                                <div className="card-body">
                                                     <div className="d-flex justify-content-center mb-1">
-                                                        <img src={`/${networkName}.png`} class="img-fluid mx-auto rounded" alt={item.networkName} width={40} height={40} />
+                                                        <img src={`/${networkName}.png`} className="img-fluid mx-auto rounded" alt={item.networkName} width={40} height={40} />
                                                     </div>
-                                                    <h3 class="card-text text-center">NGN{item.amount.toLocaleString()}</h3>
+                                                    <h3 className="card-text text-center">NGN{item.amount.toLocaleString()}</h3>
                                                     {
                                                         <p className="text-center"></p>
                                                     }
-                                                    <button type="button" class="btn btn-success btn-lg btn-block mb-5" onClick={() => handleBuyNow(item.amount)}>Buy Now</button>
+                                                    <FlutterwavePayment amount={item.amount} phoneNumber={phoneNumber} smartCardNo={''} title={'Buy Airtime'} description={'Payment for Airtime'} />
                                                 </div>
                                             </div>
                                         </div>
@@ -157,16 +159,16 @@ const SelectedProvider = () => {
                                 dstvBillsAmount.map(item => {
                                     return (
                                         <div className="col-md-4 mb-3">
-                                            <div class="card bg-light" style={{width: '22rem', height: '13rem'}}>
-                                                <div class="card-body">
+                                            <div className="card bg-light" style={{width: '22rem', height: '13rem'}}>
+                                                <div className="card-body">
                                                     <div className="d-flex justify-content-center mb-1">
-                                                        <img src={`/${networkName}.png`} class="img-fluid mx-auto rounded" alt={item.networkName} width={40} height={40} />
+                                                        <img src={`/${networkName}.png`} className="img-fluid mx-auto rounded" alt={item.networkName} width={40} height={40} />
                                                     </div>
-                                                    <h3 class="card-text text-center">NGN{item.amount.toLocaleString()}</h3>
+                                                    <h3 className="card-text text-center">NGN{item.amount.toLocaleString()}</h3>
                                                     {
                                                         <p className="text-center">{item.label}</p>
                                                     }
-                                                    <button type="button" class="btn btn-success btn-lg btn-block mb-5" onClick={() => handleBuyNow(item.amount)}>Buy Now</button>
+                                                    <FlutterwavePayment amount={item.amount} phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Bills'} description={'Payment for Bills'} />
                                                 </div>
                                             </div>
                                         </div>
@@ -183,16 +185,16 @@ const SelectedProvider = () => {
                                 gotvBillsAmount.map(item => {
                                     return (
                                         <div className="col-md-4 mb-3">
-                                            <div class="card bg-light" style={{width: '22rem', height: '13rem'}}>
-                                                <div class="card-body">
+                                            <div className="card bg-light" style={{width: '22rem', height: '13rem'}}>
+                                                <div className="card-body">
                                                     <div className="d-flex justify-content-center mb-1">
-                                                        <img src={`/${networkName}.png`} class="img-fluid mx-auto rounded" alt={item.networkName} width={40} height={40} />
+                                                        <img src={`/${networkName}.png`} className="img-fluid mx-auto rounded" alt={item.networkName} width={40} height={40} />
                                                     </div>
-                                                    <h3 class="card-text text-center">NGN{item.amount.toLocaleString()}</h3>
+                                                    <h3 className="card-text text-center">NGN{item.amount.toLocaleString()}</h3>
                                                     {
                                                         <p className="text-center">{item.label}</p>
                                                     }
-                                                    <button type="button" class="btn btn-success btn-lg btn-block mb-5" onClick={() => handleBuyNow(item.amount)}>Buy Now</button>
+                                                    <FlutterwavePayment amount={item.amount} phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Bills'} description={'Payment for Bills'} />
                                                 </div>
                                             </div>
                                         </div>

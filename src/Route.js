@@ -52,6 +52,9 @@ export const LOGIN_API_ROUTE = 'login';
 export const FORGOT_PASSWORD_API_ROUTE = 'forgot_password';
 export const VERIFY_EMAIL_RESET_PASSWORD_API_ROUTE = 'reset_password';
 export const RESET_PASSWORD_API_ROUTE = 'reset_password';
+export const MAKE_PAYMENT_API_ROUTE = 'payment/create';
+
+
 
 
 
