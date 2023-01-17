@@ -47,7 +47,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
        
         handleFlutterPayment({
             callback: (response) => {
-                console.log('Payment response: ',response);
+                // console.log('Payment response: ',response);
 
                 let txref_data = {
                     tx_ref: response.tx_ref,
@@ -75,7 +75,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
                             phone_number: phoneNumber
                         }
 
-                        console.log('Payment data: ', data);
+                        // console.log('Payment data: ', data);
 
                         savePaymentAndRechargeNumber(data);
                        
@@ -98,7 +98,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
     }
 
     const savePaymentAndRechargeNumber = (data) => {
-        // save payment and send airtime
+        // save payment and recharge number
         axios.post(`${BASE_API_ROUTE}${MAKE_PAYMENT_API_ROUTE}`, data, {
             headers: headers
         })
