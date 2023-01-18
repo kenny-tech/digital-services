@@ -5,7 +5,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
-const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardNo}) => {
+const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardNo, item_code, biller_code}) => {
 
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -25,7 +25,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
         payment_options: 'card,mobilemoney,ussd',
         customer: {
           email: localStorage.getItem('email'),
-          phone_number: phoneNumber,
+          phone_number: '',
           name: localStorage.getItem('name'),
         },
         customizations: {
@@ -39,8 +39,8 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
 
     const handleBuyNow = () => {
         setLoading(true);
-        if(phoneNumber.length === 0) {
-            alert('Phone number cannot be blank and must be 11 characters.');
+        if(phoneNumber.length !== 11) {
+            alert('Phone number cannot be blank and must be 11 digits.');
             setLoading(false);
             navigate(0);
         } 

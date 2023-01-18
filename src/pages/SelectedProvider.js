@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-
 import { BASE_API_ROUTE, GET_BILL_CATEGORIES_API_ROUTE } from "../Route";
 
 import Navigation from "../components/Navigation";
 import FlutterwavePayment from "../components/FlutterwavePayment";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const SelectedProvider = () => {
 
@@ -14,6 +14,8 @@ const SelectedProvider = () => {
     const type = location.state.type;
     const usertoken = localStorage.getItem("token");
     const [billerCategory, setBillerCategory] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const headers = {
         'Content-Type': 'application/json',
@@ -118,15 +120,19 @@ const SelectedProvider = () => {
     }, []);  
 
     const getBillCategories = () => {
+        setIsLoading(true);
         axios.get(`${BASE_API_ROUTE}${GET_BILL_CATEGORIES_API_ROUTE}`, {
             headers: headers
         })
         .then(function (response) {
-          console.log(response.data.data);
-          setBillerCategory(response.data.data);
+            // console.log(response.data.data);
+            setIsLoading(false);
+            setBillerCategory(response.data.data);
         })
         .catch(function (error) {
-          console.log('error: ',error);
+            setIsLoading(false);
+            setErrorMessage("Unable to fetch user list");
+            console.log('error: ',error);
         });
     }
 
@@ -170,7 +176,7 @@ const SelectedProvider = () => {
                                                     {
                                                         <p className="text-center"></p>
                                                     }
-                                                    <FlutterwavePayment amount={item.amount} phoneNumber={phoneNumber} smartCardNo={''} title={'Buy Airtime'} description={'Payment for Airtime'} />
+                                                    <FlutterwavePayment amount={item.amount} phoneNumber={phoneNumber} item_code={''} biller_code={''} smartCardNo={''} title={'Buy Airtime'} description={'Payment for Airtime'} />
                                                 </div>
                                             </div>
                                         </div>
@@ -178,6 +184,9 @@ const SelectedProvider = () => {
                                 })
                             }
                         </>) : null
+                    }
+                    {
+                        isLoading ? <div><LoadingSpinner /></div> : null
                     }
 
                     {
@@ -201,6 +210,7 @@ const SelectedProvider = () => {
                                 //         </div>
                                 //     )
                                 // })
+                               
                                 <div className="row">
                                     {billerCategory && billerCategory.filter(item => item.short_name === 'DSTV').map(category => (
                                         <div className="col-md-4 mb-3">
@@ -213,7 +223,7 @@ const SelectedProvider = () => {
                                                 {
                                                     <p className="text-center">{category.biller_name}</p>
                                                 }
-                                                <FlutterwavePayment amount={category.amount} phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Bills'} description={'Payment for Bills'} />
+                                                <FlutterwavePayment amount={category.amount} item_code={category.item_code} biller_code={category.biller_code} phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Bills'} description={'Payment for Bills'} />
                                                 </div>
                                             </div>
                                         </div>
@@ -257,7 +267,7 @@ const SelectedProvider = () => {
                                                 {
                                                     <p className="text-center">{category.biller_name}</p>
                                                 }
-                                                <FlutterwavePayment amount={category.amount} phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Bills'} description={'Payment for Bills'} />
+                                                <FlutterwavePayment amount={category.amount} item_code={category.item_code} biller_code={category.biller_code}phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Bills'} description={'Payment for Bills'} />
                                                 </div>
                                             </div>
                                         </div>

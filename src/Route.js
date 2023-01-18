@@ -53,7 +53,7 @@ export const FORGOT_PASSWORD_API_ROUTE = 'forgot_password';
 export const VERIFY_EMAIL_RESET_PASSWORD_API_ROUTE = 'reset_password';
 export const RESET_PASSWORD_API_ROUTE = 'reset_password';
 export const MAKE_PAYMENT_API_ROUTE = 'payment/create';
-export const GET_BILL_CATEGORIES_API_ROUTE = 'get_bill_categories';
+export const GET_BILL_CATEGORIES_API_ROUTE = 'get_bill_categories/cable';
 export const VERIFY_PAYMENT_API_ROUTE = 'payment/verify_payment';
 
 
