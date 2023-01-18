@@ -5,7 +5,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
-const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardNo, item_code, biller_code}) => {
+const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardNo, item_code, biller_code, biller_name}) => {
 
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -39,8 +39,14 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
 
     const handleBuyNow = () => {
         setLoading(true);
-        if(phoneNumber.length !== 11) {
+        if(phoneNumber.length !== 11 && title == 'Buy Airtime') {
             alert('Phone number cannot be blank and must be 11 digits.');
+            setLoading(false);
+            navigate(0);
+        } 
+
+        if(smartCardNo.length !== 11 && title == 'Pay Bills') {
+            alert('Smart card number cannot be blank and must be 11 digits.');
             setLoading(false);
             navigate(0);
         } 
@@ -59,7 +65,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
                 })
                 .then(function (response) {
                     // if payment is successfully verified, save payment and recharge number
-                    console.log('Successful payment data: ', response);
+                    // console.log('Successful payment data: ', response);
                     if(response.data.status === 'success') {
                         let data = {
                             payment_title: title,
@@ -72,7 +78,9 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
                             transaction_id: response.data.data.transaction_id,
                             currency: response.data.data.currency,
                             payment_date: response.data.data.created_at,
-                            phone_number: phoneNumber
+                            phone_number: phoneNumber,
+                            smart_card_number: smartCardNo,
+                            biller_name: biller_name,
                         }
 
                         // console.log('Payment data: ', data);
@@ -105,7 +113,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
         .then(function (response) {
             console.log('Payment success response: ',response);
             Swal.fire(
-                'Airtime sent successfully.',
+                'Recharge done successfully.',
                 'Payment successful!',
                 'success'
             )   

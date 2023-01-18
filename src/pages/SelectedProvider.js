@@ -176,7 +176,7 @@ const SelectedProvider = () => {
                                                     {
                                                         <p className="text-center"></p>
                                                     }
-                                                    <FlutterwavePayment amount={item.amount} phoneNumber={phoneNumber} item_code={''} biller_code={''} smartCardNo={''} title={'Buy Airtime'} description={'Payment for Airtime'} />
+                                                    <FlutterwavePayment amount={item.amount} phoneNumber={phoneNumber} item_code={''} biller_code={''} biller_name={''} smartCardNo={''} title={'Buy Airtime'} description={'Payment for Airtime'} />
                                                 </div>
                                             </div>
                                         </div>
@@ -201,7 +201,7 @@ const SelectedProvider = () => {
                                             {
                                                 <p className="text-center">{category.biller_name}</p>
                                             }
-                                            <FlutterwavePayment amount={category.amount} item_code={category.item_code} biller_code={category.biller_code} phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Bills'} description={'Payment for Bills'} />
+                                            <FlutterwavePayment amount={category.amount} item_code={category.item_code} biller_code={category.biller_code} biller_name={category.biller_name} phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Bills'} description={'Payment for Bills'} />
                                             </div>
                                         </div>
                                     </div>
@@ -265,7 +265,7 @@ const SelectedProvider = () => {
                                             {
                                                 <p className="text-center">{category.biller_name}</p>
                                             }
-                                            <FlutterwavePayment amount={category.amount} item_code={category.item_code} biller_code={category.biller_code}phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Bills'} description={'Payment for Bills'} />
+                                            <FlutterwavePayment amount={category.amount} item_code={category.item_code} biller_code={category.biller_code} biller_name={category.biller_name} phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Bills'} description={'Payment for Bills'} />
                                             </div>
                                         </div>
                                     </div>
