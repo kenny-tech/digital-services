@@ -185,13 +185,29 @@ const SelectedProvider = () => {
                             }
                         </>) : null
                     }
-                    {
-                        isLoading ? <div><LoadingSpinner /></div> : null
-                    }
 
                     {
                         type === 'Bills' && networkName === 'DSTV' ? (<>
                             {
+                                isLoading ? <div><LoadingSpinner /></div> : ( <div className="row ml-2">
+                                {billerCategory && billerCategory.filter(item => item.short_name === 'DSTV').map(category => (
+                                    <div className="col-md-4 mb-3">
+                                        <div className="card bg-light" style={{width: '22rem', height: '13rem'}}>
+                                            <div className="card-body">
+                                                <div className="d-flex justify-content-center mb-1">
+                                                    <img src={`/${category.short_name}.png`} className="img-fluid mx-auto rounded" alt={category.short_name} width={40} height={40} />
+                                                </div>
+                                            <h3 className="card-text text-center">NGN{category.amount.toLocaleString()}</h3>
+                                            {
+                                                <p className="text-center">{category.biller_name}</p>
+                                            }
+                                            <FlutterwavePayment amount={category.amount} item_code={category.item_code} biller_code={category.biller_code} phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Bills'} description={'Payment for Bills'} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>)
+                            
                                 // dstvBillsAmount.map(item => {
                                 //     return (
                                 //         <div className="col-md-4 mb-3">
@@ -210,25 +226,6 @@ const SelectedProvider = () => {
                                 //         </div>
                                 //     )
                                 // })
-                               
-                                <div className="row">
-                                    {billerCategory && billerCategory.filter(item => item.short_name === 'DSTV').map(category => (
-                                        <div className="col-md-4 mb-3">
-                                            <div className="card bg-light" style={{width: '22rem', height: '13rem'}}>
-                                                <div className="card-body">
-                                                    <div className="d-flex justify-content-center mb-1">
-                                                        <img src={`/${category.short_name}.png`} className="img-fluid mx-auto rounded" alt={category.short_name} width={40} height={40} />
-                                                    </div>
-                                                <h3 className="card-text text-center">NGN{category.amount.toLocaleString()}</h3>
-                                                {
-                                                    <p className="text-center">{category.biller_name}</p>
-                                                }
-                                                <FlutterwavePayment amount={category.amount} item_code={category.item_code} biller_code={category.biller_code} phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Bills'} description={'Payment for Bills'} />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
                             }
                         </>
                         ) : null
@@ -237,6 +234,7 @@ const SelectedProvider = () => {
                     {
                         type === 'Bills' && networkName === 'GoTv' ? (<>
                             {
+                                
                                 // gotvBillsAmount.map(item => {
                                 //     return (
                                 //         <div className="col-md-4 mb-3">
@@ -255,24 +253,25 @@ const SelectedProvider = () => {
                                 //         </div>
                                 //     )
                                 // })
-                                <div className="row">
-                                    {billerCategory && billerCategory.filter(item => item.short_name === 'GOTV').map(category => (
-                                        <div className="col-md-4 mb-3">
-                                            <div className="card bg-light" style={{width: '22rem', height: '13rem'}}>
-                                                <div className="card-body">
-                                                    <div className="d-flex justify-content-center mb-1">
-                                                        <img src={`/${category.short_name}.png`} className="img-fluid mx-auto rounded" alt={category.short_name} width={40} height={40} />
-                                                    </div>
-                                                <h3 className="card-text text-center">NGN{category.amount.toLocaleString()}</h3>
-                                                {
-                                                    <p className="text-center">{category.biller_name}</p>
-                                                }
-                                                <FlutterwavePayment amount={category.amount} item_code={category.item_code} biller_code={category.biller_code}phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Bills'} description={'Payment for Bills'} />
+                                isLoading ? <div><LoadingSpinner /></div> : ( <div className="row ml-2">
+                                {billerCategory && billerCategory.filter(item => item.short_name === 'GOTV').map(category => (
+                                    <div className="col-md-4 mb-3">
+                                        <div className="card bg-light" style={{width: '22rem', height: '13rem'}}>
+                                            <div className="card-body">
+                                                <div className="d-flex justify-content-center mb-1">
+                                                    <img src={`/${category.short_name}.png`} className="img-fluid mx-auto rounded" alt={category.short_name} width={40} height={40} />
                                                 </div>
+                                            <h3 className="card-text text-center">NGN{category.amount.toLocaleString()}</h3>
+                                            {
+                                                <p className="text-center">{category.biller_name}</p>
+                                            }
+                                            <FlutterwavePayment amount={category.amount} item_code={category.item_code} biller_code={category.biller_code}phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Bills'} description={'Payment for Bills'} />
                                             </div>
                                         </div>
-                                    ))}
-                                </div>
+                                    </div>
+                                ))}
+                            </div>)
+                                
                             }
                         </>
                         ) : null
