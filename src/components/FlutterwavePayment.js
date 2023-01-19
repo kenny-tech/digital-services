@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
-import { BASE_API_ROUTE, MAKE_PAYMENT_API_ROUTE, VERIFY_PAYMENT_API_ROUTE } from "../Route";
+import { BASE_API_ROUTE, MAKE_PAYMENT_API_ROUTE, VERIFY_PAYMENT_API_ROUTE, VALIDATE_CUSTOMER_API_ROUTE } from "../Route";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
@@ -38,6 +38,8 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
     const handleFlutterPayment = useFlutterwave(config);
 
     const handleBuyNow = () => {
+        // console.log('Phone number: ', phoneNumber);
+        // console.log('Smart card number: ', smartCardNo);
         setLoading(true);
         if(phoneNumber.length !== 11 && title == 'Buy Airtime') {
             alert('Phone number cannot be blank and must be 11 digits.');
@@ -45,10 +47,14 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
             navigate(0);
         } 
 
-        if(smartCardNo.length !== 11 && title == 'Pay Bills') {
-            alert('Smart card number cannot be blank and must be 11 digits.');
+        if(smartCardNo.length !== 10 && title == 'Pay Bills') {
+            alert('Smart card number cannot be blank and must be 10 digits.');
             setLoading(false);
             navigate(0);
+        } 
+
+        if(title == 'Pay Bills') {
+            validateCustomer(item_code, biller_code, smartCardNo);
         } 
        
         handleFlutterPayment({
@@ -128,6 +134,32 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
                 'error'
             )   
         });
+    }
+
+    const validateCustomer = (item_code, biller_code, customer) => {
+        let data = {
+            item_code,
+            biller_code,
+            customer
+        }
+
+        // validate smart card number or phone number
+        axios.post(`${BASE_API_ROUTE}${VALIDATE_CUSTOMER_API_ROUTE}`, data, {
+            headers: headers
+        })
+        .then(function (response) {
+            // console.log('Validate customer response: ',response);
+        })
+        .catch(function (error) {
+            setLoading(false);
+            Swal.fire(
+                'Error!',
+                error.response.data.message,
+                'error'
+            );   
+            navigate(0);
+        });
+        
     }
 
     return (
