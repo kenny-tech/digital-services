@@ -125,7 +125,7 @@ const SelectedProvider = () => {
             headers: headers
         })
         .then(function (response) {
-            // console.log(response.data.data);
+            console.log(response.data.data);
             setIsLoading(false);
             setBillerCategory(response.data.data);
         })
@@ -190,12 +190,14 @@ const SelectedProvider = () => {
                         type === 'Bills' && networkName === 'DSTV' ? (<>
                             {
                                 isLoading ? <div><LoadingSpinner /></div> : ( <div className="row ml-2">
-                                {billerCategory && billerCategory.filter(item => item.short_name === 'DSTV').map(category => (
+                                {
+                                    
+                                billerCategory && billerCategory.filter(item => item.biller_name.split(" ")[0] === 'DSTV' && item.country === 'NG').map(category => (
                                     <div className="col-md-4 mb-3">
                                         <div className="card bg-light" style={{width: '22rem', height: '13rem'}}>
                                             <div className="card-body">
                                                 <div className="d-flex justify-content-center mb-1">
-                                                    <img src={`/${category.short_name}.png`} className="img-fluid mx-auto rounded" alt={category.short_name} width={40} height={40} />
+                                                    <img src={`/${networkName}.png`} className="img-fluid mx-auto rounded" width={40} height={40} />
                                                 </div>
                                             <h3 className="card-text text-center">NGN{category.amount.toLocaleString()}</h3>
                                             {
@@ -254,14 +256,15 @@ const SelectedProvider = () => {
                                 //     )
                                 // })
                                 isLoading ? <div><LoadingSpinner /></div> : ( <div className="row ml-2">
-                                {billerCategory && billerCategory.filter(item => item.short_name === 'GOTV').map(category => (
+                                {
+                                billerCategory && billerCategory.filter(item => (item.biller_name.split(" ")[0] === 'GOTV' || item.biller_name.split(" ")[0] === 'GOtv' ) && item.country === 'NG').map(category => (
                                     <div className="col-md-4 mb-3">
-                                        <div className="card bg-light" style={{width: '22rem', height: '13rem'}}>
+                                        <div className="card bg-light" style={{width: '22rem', height: '13rem'}}> 
                                             <div className="card-body">
                                                 <div className="d-flex justify-content-center mb-1">
-                                                    <img src={`/${category.short_name}.png`} className="img-fluid mx-auto rounded" alt={category.short_name} width={40} height={40} />
+                                                <img src={`/${networkName}.png`} className="img-fluid mx-auto rounded" width={40} height={40} />
                                                 </div>
-                                            <h3 className="card-text text-center">NGN{category.amount.toLocaleString()}</h3>
+                                            <h3 className="card-text text-center">NGN{category.amount.toLocaleString()}</h3> 
                                             {
                                                 <p className="text-center">{category.biller_name}</p>
                                             }

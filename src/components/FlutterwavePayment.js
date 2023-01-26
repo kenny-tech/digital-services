@@ -18,7 +18,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
     }
 
     const config = {
-        public_key: 'FLWPUBK_TEST-58e3361d41799afe58295ffc9c12dbf3-X',
+        public_key: 'FLWPUBK-6c675eeb5e923f572a94c100503d0fe1-X',
         tx_ref: Date.now(),
         amount,
         currency: 'NGN',
@@ -53,7 +53,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
             navigate(0);
         } 
 
-        if(title == 'Pay Bills') {
+        if(title === 'Pay Bills') {
             validateCustomer(item_code, biller_code, smartCardNo);
         } 
        
