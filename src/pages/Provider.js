@@ -41,7 +41,7 @@ const Provider = () => {
                     </div>
                 </div>) : (<div className="row no-gutters mt-5">
                     <div className="col-12">
-                        <p>Select a Provider</p>
+                        <p className="ml-3">Select a Provider</p>
                     </div>
                     <Link to="/selected-provider" state={{ networkName: "DSTV", type: "Bills" }}>
                         <Network name="DSTV" image="/dstv.png" />

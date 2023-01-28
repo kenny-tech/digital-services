@@ -1,14 +1,21 @@
 import { useState } from "react";
 import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
-import { BASE_API_ROUTE, MAKE_PAYMENT_API_ROUTE } from "../Route";
+import { BASE_API_ROUTE, MAKE_PAYMENT_API_ROUTE, VERIFY_PAYMENT_API_ROUTE, VALIDATE_CUSTOMER_API_ROUTE } from "../Route";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
-const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardNo}) => {
+const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardNo, item_code, biller_code, biller_name}) => {
 
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+
+    const usertoken = localStorage.getItem("token");
+
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${usertoken}`
+    }
 
     const config = {
         public_key: 'FLWPUBK_TEST-58e3361d41799afe58295ffc9c12dbf3-X',
@@ -18,7 +25,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
         payment_options: 'card,mobilemoney,ussd',
         customer: {
           email: localStorage.getItem('email'),
-          phone_number: phoneNumber,
+          phone_number: '',
           name: localStorage.getItem('name'),
         },
         customizations: {
@@ -31,64 +38,128 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
     const handleFlutterPayment = useFlutterwave(config);
 
     const handleBuyNow = () => {
+        // console.log('Phone number: ', phoneNumber);
+        // console.log('Smart card number: ', smartCardNo);
         setLoading(true);
-        if(phoneNumber.length === 0) {
-            alert('Phone number cannot be blank and must be 11 characters.');
+        if(phoneNumber.length !== 11 && title == 'Buy Airtime') {
+            alert('Phone number cannot be blank and must be 11 digits.');
             setLoading(false);
             navigate(0);
+        } 
+
+        if(smartCardNo.length !== 10 && title == 'Pay Bills') {
+            alert('Smart card number cannot be blank and must be 10 digits.');
+            setLoading(false);
+            navigate(0);
+        } 
+
+        if(title === 'Pay Bills') {
+            validateCustomer(item_code, biller_code, smartCardNo);
         } 
        
         handleFlutterPayment({
             callback: (response) => {
-            console.log('Payment response: ',response);
-                if(response.status === 'successful') {
-                    let data = {
-                        payment_title: title,
-                        user_id: localStorage.getItem('user_id'),
-                        status: response.status,
-                        tx_ref: response.tx_ref,
-                        response_code: response.charge_response_code,
-                        amount: response.charged_amount,
-                        flw_ref: response.flw_ref,
-                        transaction_id: response.transaction_id,
-                        currency: response.currency,
-                        payment_date: response.created_at,
-                        phone_number: phoneNumber
-                    }
-                
-                const usertoken = localStorage.getItem("token");
+                // console.log('Payment response: ',response);
 
-                const headers = {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${usertoken}`
+                let txref_data = {
+                    tx_ref: response.tx_ref,
                 }
 
-                axios.post(`${BASE_API_ROUTE}${MAKE_PAYMENT_API_ROUTE}`, data, {
+                // verify payment
+                axios.post(`${BASE_API_ROUTE}${VERIFY_PAYMENT_API_ROUTE}`, txref_data, {
                     headers: headers
                 })
-                    .then(function (response) {
-                        // console.log(response);
-                        Swal.fire(
-                            'Airtime sent successfully.',
-                            'Payment successful!',
-                            'success'
-                        )   
-                        setLoading(false);    
-                    })
-                    .catch(function (error) {
-                        // console.log('Error: ',error);
-                        setLoading(false);
-                        Swal.fire(
-                            'Error!',
-                            error.response.data.message,
-                            'error'
-                        )   
-                    });
-                }
-                closePaymentModal() // this will close the modal programmatically
+                .then(function (response) {
+                    // if payment is successfully verified, save payment and recharge number
+                    // console.log('Successful payment data: ', response);
+                    if(response.data.status === 'success') {
+                        let data = {
+                            payment_title: title,
+                            user_id: localStorage.getItem('user_id'),
+                            status: response.data.data.status,
+                            tx_ref: response.data.data.tx_ref,
+                            response_code: response.data.data.charge_response_code,
+                            amount: response.data.data.amount,
+                            flw_ref: response.data.data.flw_ref,
+                            transaction_id: response.data.data.transaction_id,
+                            currency: response.data.data.currency,
+                            payment_date: response.data.data.created_at,
+                            phone_number: phoneNumber,
+                            smart_card_number: smartCardNo,
+                            biller_name: biller_name,
+                        }
+
+                        // console.log('Payment data: ', data);
+
+                        savePaymentAndRechargeNumber(data);
+                       
+                        closePaymentModal() // this will close the modal programmatically
+                    }
+                    setLoading(false);    
+                })
+                .catch(function (error) {
+                    // console.log('Error: ',error);
+                    setLoading(false);
+                    Swal.fire(
+                        'Error!',
+                        error.response.data.message,
+                        'error'
+                    )   
+                });
             },
             onClose: () => {},
         });
+    }
+
+    const savePaymentAndRechargeNumber = (data) => {
+        // save payment and recharge number
+        axios.post(`${BASE_API_ROUTE}${MAKE_PAYMENT_API_ROUTE}`, data, {
+            headers: headers
+        })
+        .then(function (response) {
+            console.log('Payment success response: ',response);
+            Swal.fire(
+                'Recharge done successfully.',
+                'Payment successful!',
+                'success'
+            )   
+            setLoading(false);    
+        })
+        .catch(function (error) {
+            // console.log('Error: ',error);
+            setLoading(false);
+            Swal.fire(
+                'Error!',
+                error.response.data.message,
+                'error'
+            )   
+        });
+    }
+
+    const validateCustomer = (item_code, biller_code, customer) => {
+        let data = {
+            item_code,
+            biller_code,
+            customer
+        }
+
+        // validate smart card number or phone number
+        axios.post(`${BASE_API_ROUTE}${VALIDATE_CUSTOMER_API_ROUTE}`, data, {
+            headers: headers
+        })
+        .then(function (response) {
+            // console.log('Validate customer response: ',response);
+        })
+        .catch(function (error) {
+            setLoading(false);
+            Swal.fire(
+                'Error!',
+                error.response.data.message,
+                'error'
+            );   
+            navigate(0);
+        });
+        
     }
 
     return (
