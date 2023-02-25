@@ -1,5 +1,6 @@
 {
   "name": "digital-services",
+  "homepage": "https://cakamba.com/digitalstore",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
