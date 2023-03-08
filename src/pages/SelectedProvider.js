@@ -49,72 +49,6 @@ const SelectedProvider = () => {
         },
     ]
 
-    let dstvBillsAmount = [
-        {
-          "id": 1,
-          "amount": 1000,
-          "label": 'DSTV Starter'
-        },
-        {
-            "id": 2,
-            "amount": 2000,
-            "label": 'DSTV Medium'
-        },
-        {
-            "id": 3,
-            "amount": 5000,
-            "label": 'DSTV Max'
-        },
-        {
-            "id": 4,
-            "amount": 10000,
-            "label": 'DSTV Basuc'
-        },
-        {
-            "id": 5,
-            "amount": 20000,
-            "label": 'DSTV Standard'
-        },
-        {
-            "id": 6,
-            "amount": 35000,
-            "label": 'DSTV Premium'
-        },
-    ]
-
-    let gotvBillsAmount = [
-        {
-          "id": 1,
-          "amount": 1000,
-          "label": 'GoTv Starter'
-        },
-        {
-            "id": 2,
-            "amount": 2000,
-            "label": 'GoTv Medium'
-        },
-        {
-            "id": 3,
-            "amount": 5000,
-            "label": 'GoTv Max'
-        },
-        {
-            "id": 4,
-            "amount": 10000,
-            "label": 'GoTv Basuc'
-        },
-        {
-            "id": 5,
-            "amount": 20000,
-            "label": 'GoTv Standard'
-        },
-        {
-            "id": 6,
-            "amount": 35000,
-            "label": 'GoTv Premium'
-        },
-    ]
-
     useEffect(() => {
         getBillCategories();
     }, []);  
@@ -170,7 +104,7 @@ const SelectedProvider = () => {
                                             <div className="card bg-light" style={{width: '22rem', height: '13rem'}}>
                                                 <div className="card-body">
                                                     <div className="d-flex justify-content-center mb-1">
-                                                        <img src={`/${networkName}.png`} className="img-fluid mx-auto rounded" alt={item.networkName} width={40} height={40} />
+                                                        <img src={`/${networkName.toLowerCase()}.png`} className="img-fluid mx-auto rounded" alt={item.networkName} width={40} height={40} />
                                                     </div>
                                                     <h3 className="card-text text-center">NGN{item.amount.toLocaleString()}</h3>
                                                     {
@@ -197,7 +131,7 @@ const SelectedProvider = () => {
                                         <div className="card bg-light" style={{width: '22rem', height: '13rem'}}>
                                             <div className="card-body">
                                                 <div className="d-flex justify-content-center mb-1">
-                                                    <img src={`/${networkName}.png`} className="img-fluid mx-auto rounded" width={40} height={40} />
+                                                    <img src={`/${networkName.toLowerCase()}.png`} className="img-fluid mx-auto rounded" width={40} height={40} />
                                                 </div>
                                             <h3 className="card-text text-center">NGN{category.amount.toLocaleString()}</h3>
                                             {
@@ -262,7 +196,7 @@ const SelectedProvider = () => {
                                         <div className="card bg-light" style={{width: '22rem', height: '13rem'}}> 
                                             <div className="card-body">
                                                 <div className="d-flex justify-content-center mb-1">
-                                                <img src={`/${networkName}.png`} className="img-fluid mx-auto rounded" width={40} height={40} />
+                                                <img src={`/${networkName.toLowerCase()}.png`} className="img-fluid mx-auto rounded" width={40} height={40} />
                                                 </div>
                                             <h3 className="card-text text-center">NGN{category.amount.toLocaleString()}</h3> 
                                             {
