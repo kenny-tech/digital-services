@@ -59,7 +59,7 @@ const SelectedProvider = () => {
             headers: headers
         })
         .then(function (response) {
-            console.log(response.data.data);
+            console.log('Bill categories: ',response.data.data);
             setIsLoading(false);
             setBillerCategory(response.data.data);
         })
