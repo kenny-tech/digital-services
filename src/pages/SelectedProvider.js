@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { BASE_API_ROUTE, GET_BILL_CATEGORIES_API_ROUTE } from "../Route";
+import { useNavigate } from "react-router-dom";
 
 import Navigation from "../components/Navigation";
 import FlutterwavePayment from "../components/FlutterwavePayment";
@@ -9,6 +10,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 
 const SelectedProvider = () => {
 
+    const navigate = useNavigate()
     const location = useLocation();
     const networkName = location.state.networkName;
     const type = location.state.type;
@@ -68,6 +70,14 @@ const SelectedProvider = () => {
             setErrorMessage("Unable to fetch user list");
             console.log('Error message; ', error.response.data.message)
             console.log('error: ',error);
+            if(error.response.data.message === 'Unauthenticated') {
+                Swal.fire(
+                    'Error!',
+                    'Your session has expired. Please login again to continue.',
+                    'error'
+                )
+                navigate('/login');
+            }
         });
     }
 
