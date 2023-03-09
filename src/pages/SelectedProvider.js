@@ -66,6 +66,7 @@ const SelectedProvider = () => {
         .catch(function (error) {
             setIsLoading(false);
             setErrorMessage("Unable to fetch user list");
+            console.log('Error message; ', error.response.data.message)
             console.log('error: ',error);
         });
     }
