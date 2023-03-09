@@ -11,6 +11,8 @@
 # production
 /build
 
+Route.js
+
 # misc
 .DS_Store
 .env.local
