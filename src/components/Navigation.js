@@ -28,7 +28,7 @@ const Navigation = () => {
                             Account
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            {/* <a class="dropdown-item" style={{cursor: 'pointer'}} href="#">Profile</a> */}
+                            {/* <a class="dropdown-item" style={{cursor: 'pointer'}} href="/profile">Profile</a> */}
                             <a class="dropdown-item" style={{cursor: 'pointer'}} onClick={() => handleLogout()}>Log out</a>
                         </div>
                     </li>) : (<>

@@ -1,0 +1,13 @@
+.sidebarContainer {
+    height: 700px;
+}
+
+.linkText {
+    color: #000;
+}
+
+@media screen and (max-width: 600px) {
+    .sidebarContainer {
+        height: 200px;
+    }
+}
