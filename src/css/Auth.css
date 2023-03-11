@@ -1,0 +1,7 @@
+.register {
+    color: #000;
+}
+
+.register:hover {
+    color: #007bff;
+}

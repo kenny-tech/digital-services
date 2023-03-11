@@ -6,6 +6,7 @@ import Network from "../components/Network";
 import Faq from "../components/Faq";
 import InfoBox from "../components/InfoBox";
 import Navigation from "../components/Navigation";
+import WithAuth from "../services/withAuth";
 
 const Provider = () => {
 
@@ -56,4 +57,4 @@ const Provider = () => {
     )
 }
 
-export default Provider;
+export default WithAuth(Provider);

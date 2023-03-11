@@ -1,7 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Navigation = () => {
+
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.clear();
+        sessionStorage.clear();
+        navigate('/login');
+    }
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <Link className="navbar-brand" to="/">
@@ -12,10 +22,17 @@ const Navigation = () => {
             </button>
             <div className="collapse navbar-collapse justify-content-sm-end" id="navbarNavDropdown" >
                 <ul className="navbar-nav">
-                {/* <li className="nav-item active">
-                    <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
-                </li> */}
-                    <li className="nav-item">
+                    {
+                        sessionStorage.getItem('isLoggedIn') ? (<li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Account
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {/* <a class="dropdown-item" style={{cursor: 'pointer'}} href="#">Profile</a> */}
+                            <a class="dropdown-item" style={{cursor: 'pointer'}} onClick={() => handleLogout()}>Log out</a>
+                        </div>
+                    </li>) : (<>
+                        <li className="nav-item">
                         <Link to="/register">
                             <a className="nav-link">Register</a>
                         </Link>
@@ -25,6 +42,8 @@ const Navigation = () => {
                             <a className="nav-link">Login</a>
                         </Link>
                     </li>
+                    </>)
+                    } 
                 </ul>
             </div>
         </nav>

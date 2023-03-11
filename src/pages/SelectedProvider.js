@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import Navigation from "../components/Navigation";
 import FlutterwavePayment from "../components/FlutterwavePayment";
 import LoadingSpinner from "../components/LoadingSpinner";
+import WithAuth from "../services/withAuth";
 
 const SelectedProvider = () => {
 
@@ -231,4 +232,4 @@ const SelectedProvider = () => {
     )
 }
 
-export default SelectedProvider;
+export default WithAuth(SelectedProvider);

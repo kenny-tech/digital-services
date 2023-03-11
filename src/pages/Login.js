@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Swal from 'sweetalert2';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 import Navigation from "../components/Navigation";
 import { BASE_API_ROUTE, LOGIN_API_ROUTE } from "../Route";
+import '../css/Auth.css';
 
 const Login = () => {
 
@@ -21,9 +21,9 @@ const Login = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if(email.length === 0) {
+        if (email.length === 0) {
             setEmailError('Email is required');
-        } else if(password.length === 0) {
+        } else if (password.length === 0) {
             setPasswordError('Password is required');
         } else {
             setLoading(true);
@@ -34,28 +34,23 @@ const Login = () => {
             }
 
             axios.post(`${BASE_API_ROUTE}${LOGIN_API_ROUTE}`, data)
-              .then(function (response) {
-                // console.log(response);
-                if(response.data.success === true) {
-                    localStorage.setItem('token',  response.data.data.token);
-                    localStorage.setItem('name',  response.data.data.name);
-                    localStorage.setItem('email',  response.data.data.email);
-                    localStorage.setItem('user_id',  response.data.data.user_id);
-                    // Swal.fire(
-                    //     'Good job!',
-                    //     'Login successful!',
-                    //     'success'
-                    // )   
-                    navigate('/');
-                } else {
-                    setError('Invalid login details.')
-                }      
-              })
-              .catch(function (error) {
-                setError(error.response.data.message);
-                setLoading(false);
-              });
-       }
+                .then(function (response) {
+                    if (response.data.success === true) {
+                        localStorage.setItem('token', response.data.data.token);
+                        localStorage.setItem('name', response.data.data.name);
+                        localStorage.setItem('email', response.data.data.email);
+                        localStorage.setItem('user_id', response.data.data.user_id);
+                        sessionStorage.setItem("isLoggedIn", "true");
+                        navigate('/');
+                    } else {
+                        setError('Invalid login details.')
+                    }
+                })
+                .catch(function (error) {
+                    setError(error.response.data.message);
+                    setLoading(false);
+                });
+        }
 
     }
 
@@ -64,7 +59,7 @@ const Login = () => {
             <Navigation />
             <div className="row">
                 <div className="col-12 d-flex justify-content-center align-items-center mt-5">
-                    <div className="card" style={{width: '24rem'}}>
+                    <div className="card" style={{ width: '24rem' }}>
                         <div className="card-body">
                             <h5 className="card-title">Login</h5>
                             {
@@ -78,7 +73,7 @@ const Login = () => {
                                 </div>
                                 <div className="form-group">
                                     <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" className="form-control" placeholder="Password" onChange={event => setPassword(event.target.value)} value={password}/>
+                                    <input type="password" className="form-control" placeholder="Password" onChange={event => setPassword(event.target.value)} value={password} />
                                     {passwordError && password.length === 0 && <span className="text-danger">Password is required</span>}
                                 </div>
                                 {
@@ -87,7 +82,7 @@ const Login = () => {
                                     <p className="text-center mt-3 cursor-pointer">Forgot Password?</p>
                                 </Link>
                                 <Link to="/register">
-                                    <p className="text-center mt-3 cursor-pointer text-black-50">Don't have an account yet? Register</p>
+                                    <p className="text-center mt-3 cursor-pointer register">Don't have an account yet? Register</p>
                                 </Link>
                             </form>
                         </div>
