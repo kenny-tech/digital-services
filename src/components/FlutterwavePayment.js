@@ -9,6 +9,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
 
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    let phone = '+234'+phoneNumber.substring(1);
 
     const usertoken = localStorage.getItem("token");
 
@@ -84,12 +85,12 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
                             transaction_id: response.data.data.transaction_id,
                             currency: response.data.data.currency,
                             payment_date: response.data.data.created_at,
-                            phone_number: phoneNumber,
+                            phone_number: phone,
                             smart_card_number: smartCardNo,
                             biller_name: biller_name,
                         }
 
-                        // console.log('Payment data: ', data);
+                        console.log('Payment data: ', data);
 
                         savePaymentAndRechargeNumber(data);
                        
