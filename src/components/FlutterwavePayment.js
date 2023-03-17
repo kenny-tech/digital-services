@@ -9,6 +9,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
 
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    let phone = '+234'+phoneNumber.substring(1);
 
     const usertoken = localStorage.getItem("token");
 
@@ -25,7 +26,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
         payment_options: 'card,mobilemoney,ussd',
         customer: {
           email: localStorage.getItem('email'),
-          phone_number: '',
+          phone_number: phone,
           name: localStorage.getItem('name'),
         },
         customizations: {
@@ -38,7 +39,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
     const handleFlutterPayment = useFlutterwave(config);
 
     const handleBuyNow = () => {
-        // console.log('Phone number: ', phoneNumber);
+        console.log('Phone number: ', phone);
         // console.log('Smart card number: ', smartCardNo);
         setLoading(true);
         if(phoneNumber.length !== 11 && title == 'Buy Airtime') {
@@ -84,12 +85,12 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
                             transaction_id: response.data.data.transaction_id,
                             currency: response.data.data.currency,
                             payment_date: response.data.data.created_at,
-                            phone_number: phoneNumber,
+                            phone_number: phone,
                             smart_card_number: smartCardNo,
                             biller_name: biller_name,
                         }
 
-                        // console.log('Payment data: ', data);
+                        console.log('Payment data: ', data);
 
                         savePaymentAndRechargeNumber(data);
                        
@@ -117,7 +118,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
             headers: headers
         })
         .then(function (response) {
-            console.log('Payment success response: ',response);
+            // console.log('Payment success response: ',response);
             Swal.fire(
                 'Recharge done successfully.',
                 'Payment successful!',
@@ -148,7 +149,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
             headers: headers
         })
         .then(function (response) {
-            // console.log('Validate customer response: ',response);
+            console.log('Validate customer response: ',response);
         })
         .catch(function (error) {
             setLoading(false);
