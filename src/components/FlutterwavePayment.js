@@ -26,7 +26,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
         payment_options: 'card,mobilemoney,ussd',
         customer: {
           email: localStorage.getItem('email'),
-          phone_number: '',
+          phone_number: phone,
           name: localStorage.getItem('name'),
         },
         customizations: {
@@ -39,7 +39,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
     const handleFlutterPayment = useFlutterwave(config);
 
     const handleBuyNow = () => {
-        // console.log('Phone number: ', phoneNumber);
+        console.log('Phone number: ', phone);
         // console.log('Smart card number: ', smartCardNo);
         setLoading(true);
         if(phoneNumber.length !== 11 && title == 'Buy Airtime') {
@@ -118,7 +118,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
             headers: headers
         })
         .then(function (response) {
-            console.log('Payment success response: ',response);
+            // console.log('Payment success response: ',response);
             Swal.fire(
                 'Recharge done successfully.',
                 'Payment successful!',
@@ -149,7 +149,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
             headers: headers
         })
         .then(function (response) {
-            // console.log('Validate customer response: ',response);
+            console.log('Validate customer response: ',response);
         })
         .catch(function (error) {
             setLoading(false);
