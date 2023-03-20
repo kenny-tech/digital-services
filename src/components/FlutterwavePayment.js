@@ -2,8 +2,8 @@ import { useState } from "react";
 import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
 import { BASE_API_ROUTE, MAKE_PAYMENT_API_ROUTE, VERIFY_PAYMENT_API_ROUTE, VALIDATE_CUSTOMER_API_ROUTE } from "../Route";
 import axios from "axios";
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { successAlert,  errorAlert} from "../services/alert";
 
 const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardNo, item_code, biller_code, biller_name}) => {
 
@@ -101,11 +101,12 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
                 .catch(function (error) {
                     // console.log('Error: ',error);
                     setLoading(false);
-                    Swal.fire(
-                        'Error!',
-                        error.response.data.message,
-                        'error'
-                    )   
+                    errorAlert(error.response.data.message);
+                    // Swal.fire(
+                    //     'Error!',
+                    //     error.response.data.message,
+                    //     'error'
+                    // )   
                 });
             },
             onClose: () => {},
@@ -119,21 +120,18 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
         })
         .then(function (response) {
             // console.log('Payment success response: ',response);
-            Swal.fire(
-                'Recharge done successfully.',
-                'Payment successful!',
-                'success'
-            )   
+            // Swal.fire(
+            //     'Recharge done successfully.',
+            //     'Payment successful!',
+            //     'success'
+            // )   
+            successAlert('Payment successful');
             setLoading(false);    
         })
         .catch(function (error) {
             // console.log('Error: ',error);
+            errorAlert(error.response.data.message);
             setLoading(false);
-            Swal.fire(
-                'Error!',
-                error.response.data.message,
-                'error'
-            )   
         });
     }
 
@@ -153,11 +151,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
         })
         .catch(function (error) {
             setLoading(false);
-            Swal.fire(
-                'Error!',
-                error.response.data.message,
-                'error'
-            );   
+            errorAlert(error.response.data.message);  
             navigate(0);
         });
         
