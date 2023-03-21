@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
-import { BASE_API_ROUTE, MAKE_PAYMENT_API_ROUTE, VERIFY_PAYMENT_API_ROUTE, VALIDATE_CUSTOMER_API_ROUTE, SEND_AIRTIME_API_ROUTE, SUBSCRIBE_CABLETV_API_ROUTE } from "../Route";
+import { BASE_API_ROUTE, MAKE_PAYMENT_API_ROUTE, VERIFY_PAYMENT_API_ROUTE, VALIDATE_CUSTOMER_API_ROUTE } from "../Route";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { successAlert,  errorAlert} from "../services/alert";
@@ -71,7 +71,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
                 })
                 .then(function (response) {
                     // if payment is successfully verified, save payment and recharge number
-                    // console.log('Successful payment data: ', response);
+                    console.log('Successful payment response : ', response);
                     if(response.data.status === 'success') {
                         let data = {
                             payment_title: title,
@@ -91,29 +91,24 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
 
                         console.log('Payment data: ', data);
 
-                        if(phoneNumber.length !== 0) {
-                            savePaymentAndSendAirtime(data);
-                        }
+                        // if(phoneNumber.length !== 0) {
+                        //     savePaymentAndSendAirtime(data);
+                        // }
 
-                        if(smartCardNo.length !== 0) {
-                            savePaymentAndSubscribeCableTv(data);
-                        }
+                        // if(smartCardNo.length !== 0) {
+                        //     savePaymentAndSubscribeCableTv(data);
+                        // }
 
-                        // savePaymentAndRechargeNumber(data);
+                        savePaymentAndRechargeNumber(data);
                        
                         closePaymentModal() // this will close the modal programmatically
                     }
                     setLoading(false);    
                 })
                 .catch(function (error) {
-                    // console.log('Error: ',error);
+                    console.log('Error payment : ',error);
                     setLoading(false);
-                    errorAlert(error.response.data.message);
-                    // Swal.fire(
-                    //     'Error!',
-                    //     error.response.data.message,
-                    //     'error'
-                    // )   
+                    errorAlert(error.response.data.message);  
                 });
             },
             onClose: () => {},
@@ -125,13 +120,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
         axios.post(`${BASE_API_ROUTE}${MAKE_PAYMENT_API_ROUTE}`, data, {
             headers: headers
         })
-        .then(function (response) {
-            // console.log('Payment success response: ',response);
-            // Swal.fire(
-            //     'Recharge done successfully.',
-            //     'Payment successful!',
-            //     'success'
-            // )   
+        .then(function (response) {  
             successAlert('Payment successful');
             setLoading(false);    
         })
@@ -142,35 +131,37 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
         });
     }
 
-    const savePaymentAndSendAirtime = (data) => {
-        axios.post(`${BASE_API_ROUTE}${SEND_AIRTIME_API_ROUTE}`, data, {
-            headers: headers
-        })
-        .then(function (response) {
-            console.log(response);
-            successAlert('Payment successful');
-            setLoading(false);    
-        })
-        .catch(function (error) {
-            errorAlert(error.response.data.message);
-            setLoading(false);
-        });
-    }
+    // const savePaymentAndSendAirtime = (data) => {
+    //     axios.post(`${BASE_API_ROUTE}${SEND_AIRTIME_API_ROUTE}`, data, {
+    //         headers: headers
+    //     })
+    //     .then(function (response) {
+    //         console.log('Send airtime response: ',response);
+    //         successAlert('Payment successful');
+    //         setLoading(false);    
+    //     })
+    //     .catch(function (error) {
+    //         console.log('Error airtime recharge: ', error);
+    //         errorAlert(error.response.data.message);
+    //         setLoading(false);
+    //     });
+    // }
 
-    const savePaymentAndSubscribeCableTv = (data) => {
-        axios.post(`${BASE_API_ROUTE}${SUBSCRIBE_CABLETV_API_ROUTE}`, data, {
-            headers: headers
-        })
-        .then(function (response) {
-            console.log(response);
-            successAlert('Payment successful');
-            setLoading(false);    
-        })
-        .catch(function (error) {
-            errorAlert(error.response.data.message);
-            setLoading(false);
-        });
-    }
+    // const savePaymentAndSubscribeCableTv = (data) => {
+    //     axios.post(`${BASE_API_ROUTE}${SUBSCRIBE_CABLETV_API_ROUTE}`, data, {
+    //         headers: headers
+    //     })
+    //     .then(function (response) {
+    //         console.log(response);
+    //         successAlert('Payment successful');
+    //         setLoading(false);    
+    //     })
+    //     .catch(function (error) {
+    //         console.log('error subscribe cable tv: ', error);
+    //         errorAlert(error.response.data.message);
+    //         setLoading(false);
+    //     });
+    // }
 
     const validateCustomer = (item_code, biller_code, customer) => {
         let data = {
@@ -187,6 +178,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
             console.log('Validate customer response: ',response);
         })
         .catch(function (error) {
+            console.log('Validate customer error: ',error);
             setLoading(false);
             errorAlert(error.response.data.message);  
             navigate(0);
