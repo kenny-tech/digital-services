@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
-import { BASE_API_ROUTE, MAKE_PAYMENT_API_ROUTE, VERIFY_PAYMENT_API_ROUTE, VALIDATE_CUSTOMER_API_ROUTE } from "../Route";
+import { BASE_API_ROUTE, MAKE_PAYMENT_API_ROUTE, VERIFY_PAYMENT_API_ROUTE, VALIDATE_CUSTOMER_API_ROUTE, SEND_AIRTIME_API_ROUTE, SUBSCRIBE_CABLETV_API_ROUTE } from "../Route";
 import axios from "axios";
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { successAlert,  errorAlert} from "../services/alert";
 
 const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardNo, item_code, biller_code, biller_name}) => {
 
@@ -39,8 +39,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
     const handleFlutterPayment = useFlutterwave(config);
 
     const handleBuyNow = () => {
-        console.log('Phone number: ', phone);
-        // console.log('Smart card number: ', smartCardNo);
+        // console.log('Phone number: ', phone);
         setLoading(true);
         if(phoneNumber.length !== 11 && title == 'Buy Airtime') {
             alert('Phone number cannot be blank and must be 11 digits.');
@@ -92,7 +91,15 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
 
                         console.log('Payment data: ', data);
 
-                        savePaymentAndRechargeNumber(data);
+                        if(phoneNumber.length !== 0) {
+                            savePaymentAndSendAirtime(data);
+                        }
+
+                        if(smartCardNo.length !== 0) {
+                            savePaymentAndSubscribeCableTv(data);
+                        }
+
+                        // savePaymentAndRechargeNumber(data);
                        
                         closePaymentModal() // this will close the modal programmatically
                     }
@@ -101,11 +108,12 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
                 .catch(function (error) {
                     // console.log('Error: ',error);
                     setLoading(false);
-                    Swal.fire(
-                        'Error!',
-                        error.response.data.message,
-                        'error'
-                    )   
+                    errorAlert(error.response.data.message);
+                    // Swal.fire(
+                    //     'Error!',
+                    //     error.response.data.message,
+                    //     'error'
+                    // )   
                 });
             },
             onClose: () => {},
@@ -119,21 +127,48 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
         })
         .then(function (response) {
             // console.log('Payment success response: ',response);
-            Swal.fire(
-                'Recharge done successfully.',
-                'Payment successful!',
-                'success'
-            )   
+            // Swal.fire(
+            //     'Recharge done successfully.',
+            //     'Payment successful!',
+            //     'success'
+            // )   
+            successAlert('Payment successful');
             setLoading(false);    
         })
         .catch(function (error) {
             // console.log('Error: ',error);
+            errorAlert(error.response.data.message);
             setLoading(false);
-            Swal.fire(
-                'Error!',
-                error.response.data.message,
-                'error'
-            )   
+        });
+    }
+
+    const savePaymentAndSendAirtime = (data) => {
+        axios.post(`${BASE_API_ROUTE}${SEND_AIRTIME_API_ROUTE}`, data, {
+            headers: headers
+        })
+        .then(function (response) {
+            console.log(response);
+            successAlert('Payment successful');
+            setLoading(false);    
+        })
+        .catch(function (error) {
+            errorAlert(error.response.data.message);
+            setLoading(false);
+        });
+    }
+
+    const savePaymentAndSubscribeCableTv = (data) => {
+        axios.post(`${BASE_API_ROUTE}${SUBSCRIBE_CABLETV_API_ROUTE}`, data, {
+            headers: headers
+        })
+        .then(function (response) {
+            console.log(response);
+            successAlert('Payment successful');
+            setLoading(false);    
+        })
+        .catch(function (error) {
+            errorAlert(error.response.data.message);
+            setLoading(false);
         });
     }
 
@@ -153,11 +188,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
         })
         .catch(function (error) {
             setLoading(false);
-            Swal.fire(
-                'Error!',
-                error.response.data.message,
-                'error'
-            );   
+            errorAlert(error.response.data.message);  
             navigate(0);
         });
         
