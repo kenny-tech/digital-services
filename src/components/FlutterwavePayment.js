@@ -89,15 +89,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
                             biller_name: biller_name,
                         }
 
-                        console.log('Payment data: ', data);
-
-                        // if(phoneNumber.length !== 0) {
-                        //     savePaymentAndSendAirtime(data);
-                        // }
-
-                        // if(smartCardNo.length !== 0) {
-                        //     savePaymentAndSubscribeCableTv(data);
-                        // }
+                        // console.log('Payment data: ', data);
 
                         savePaymentAndRechargeNumber(data);
                        
@@ -106,7 +98,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
                     setLoading(false);    
                 })
                 .catch(function (error) {
-                    console.log('Error payment : ',error);
+                    // console.log('Error payment : ',error);
                     setLoading(false);
                     errorAlert(error.response.data.message);  
                 });
@@ -130,38 +122,6 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
             setLoading(false);
         });
     }
-
-    // const savePaymentAndSendAirtime = (data) => {
-    //     axios.post(`${BASE_API_ROUTE}${SEND_AIRTIME_API_ROUTE}`, data, {
-    //         headers: headers
-    //     })
-    //     .then(function (response) {
-    //         console.log('Send airtime response: ',response);
-    //         successAlert('Payment successful');
-    //         setLoading(false);    
-    //     })
-    //     .catch(function (error) {
-    //         console.log('Error airtime recharge: ', error);
-    //         errorAlert(error.response.data.message);
-    //         setLoading(false);
-    //     });
-    // }
-
-    // const savePaymentAndSubscribeCableTv = (data) => {
-    //     axios.post(`${BASE_API_ROUTE}${SUBSCRIBE_CABLETV_API_ROUTE}`, data, {
-    //         headers: headers
-    //     })
-    //     .then(function (response) {
-    //         console.log(response);
-    //         successAlert('Payment successful');
-    //         setLoading(false);    
-    //     })
-    //     .catch(function (error) {
-    //         console.log('error subscribe cable tv: ', error);
-    //         errorAlert(error.response.data.message);
-    //         setLoading(false);
-    //     });
-    // }
 
     const validateCustomer = (item_code, biller_code, customer) => {
         let data = {
