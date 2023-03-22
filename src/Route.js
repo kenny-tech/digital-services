@@ -63,8 +63,7 @@ export const MAKE_PAYMENT_API_ROUTE = 'payment/create';
 export const GET_BILL_CATEGORIES_API_ROUTE = 'get_bill_categories/cable';
 export const VERIFY_PAYMENT_API_ROUTE = 'payment/verify_payment';
 export const VALIDATE_CUSTOMER_API_ROUTE = 'validate_customer';
-export const SEND_AIRTIME_API_ROUTE = 'payment/create_payment_and_send_airtime';
-export const SUBSCRIBE_CABLETV_API_ROUTE = 'payment/create_payment_and_recharge_cabletv';
+
 
 
 
