@@ -53,6 +53,7 @@ export const Route = createBrowserRouter([
 // export const BASE_API_ROUTE = 'http://localhost:8000/api/';
 
 export const BASE_API_ROUTE = 'https://digitalstore-backend.cakamba.com/api/';
+
 export const REGISTER_API_ROUTE = 'register';
 export const ACTIVATE_ACCOUNT_API_ROUTE = 'activate_account';
 export const LOGIN_API_ROUTE = 'login';
@@ -63,6 +64,9 @@ export const MAKE_PAYMENT_API_ROUTE = 'payment/create';
 export const GET_BILL_CATEGORIES_API_ROUTE = 'get_bill_categories/cable';
 export const VERIFY_PAYMENT_API_ROUTE = 'payment/verify_payment';
 export const VALIDATE_CUSTOMER_API_ROUTE = 'validate_customer';
+
+export const MAIN_WEBSITE_ROUTE = 'https://www.cakamba.com/';
+
 
 
 
