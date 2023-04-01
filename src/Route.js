@@ -65,9 +65,6 @@ export const GET_BILL_CATEGORIES_API_ROUTE = 'get_bill_categories/cable';
 export const VERIFY_PAYMENT_API_ROUTE = 'payment/verify_payment';
 export const VALIDATE_CUSTOMER_API_ROUTE = 'validate_customer';
 
-export const MAIN_WEBSITE_ROUTE = 'https://www.cakamba.com/';
-
-
 
 
 
