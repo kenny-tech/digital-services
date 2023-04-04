@@ -20,7 +20,9 @@ const SelectedProvider = () => {
     const [billerCategory, setBillerCategory] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const [isAirtime, setIsAirtime] = useState(true);
 
+    // console.log('Network Name: ', networkName);
     const headers = {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${usertoken}`
@@ -83,6 +85,15 @@ const SelectedProvider = () => {
         });
     }
 
+    const handleAirtimeTypeChange = (e) => {
+        let type = e.target.value;
+        if(type === 'Airtime') {
+            setIsAirtime(true);
+        } else {
+            setIsAirtime(false);
+        }
+    }
+
     const [phoneNumber, setPhoneNumber] = useState('');
     const [smartCardNo, setSmartCardNo] = useState('');
     
@@ -96,10 +107,17 @@ const SelectedProvider = () => {
                 </div>
                 <div className="col-12 mb-3 ml-3">
                     {
-                        type === 'Airtime' ? ( <div className="form-group">
+                        type === 'Airtime' ? (<><div className="form-group">
                         <label for="phone">{'Phone Number'}</label>
                         <input type="number" max={11} className="form-control" style={{width: '70%'}} id="phone" placeholder={'Phone number'} onChange={e => setPhoneNumber(e.target.value)} required={true}/>
-                    </div>) : ( <div className="form-group">
+                    </div>
+                    <div className="form-group">
+                    <label for="type">{'Select whether Airtime or Data'}</label>
+                    <select className="form-control" name='type' style={{width: '70%'}} onChange={(e) => handleAirtimeTypeChange(e)}>
+                        <option value={'Airtime'}>Airtime</option>
+                        <option value={'Data'}>Data</option>
+                    </select>
+                </div></>) : ( <div className="form-group">
                         <label for="phone">{'Enter Smart Card Number'}</label>
                         <input type="number" max={11} className="form-control" style={{width: '70%'}} id="phone" placeholder={'Smart Card Number'} onChange={e => setSmartCardNo(e.target.value)} required={true}/>
                     </div>)
@@ -108,7 +126,7 @@ const SelectedProvider = () => {
                 
                 <div className="row ml-3">
                     {
-                        type === 'Airtime' ? (
+                        type === 'Airtime' && isAirtime ? (
                         <>
                             {
                                 rechargeAmount.map(item => {
@@ -131,6 +149,114 @@ const SelectedProvider = () => {
                                 })
                             }
                         </>) : null
+                    }
+
+                    {
+                        type === 'Airtime' && !isAirtime && networkName === 'MTN' ? (<>
+                         {
+                                isLoading ? <div><LoadingSpinner /></div> : ( <div className="row ml-2">
+                                {
+                                    
+                                billerCategory && billerCategory.filter(item => item.biller_code === 'BIL108').map(category => (
+                                    <div className="col-md-4 mb-3">
+                                        <div className="card bg-light" style={{width: '22rem', height: '13rem'}}>
+                                            <div className="card-body">
+                                                <div className="d-flex justify-content-center mb-1">
+                                                    <img src={`/${networkName.toLowerCase()}.png`} className="img-fluid mx-auto rounded" width={40} height={40} />
+                                                </div>
+                                            <h3 className="card-text text-center">NGN{category.amount.toLocaleString()}</h3>
+                                            {
+                                                <p className="text-center">{category.biller_name}</p>
+                                            }
+                                            <FlutterwavePayment amount={category.amount} item_code={category.item_code} biller_code={category.biller_code} biller_name={category.biller_name} phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Bills'} description={'Payment for Bills'} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>)
+                            }
+                        </>) : (<></>) 
+                    }
+
+                    {
+                        type === 'Airtime' && !isAirtime && networkName === 'Airtel' ? (<>
+                         {
+                                isLoading ? <div><LoadingSpinner /></div> : ( <div className="row ml-2">
+                                {
+                                    
+                                billerCategory && billerCategory.filter(item => item.biller_code === 'BIL110').map(category => (
+                                    <div className="col-md-4 mb-3">
+                                        <div className="card bg-light" style={{width: '22rem', height: '13rem'}}>
+                                            <div className="card-body">
+                                                <div className="d-flex justify-content-center mb-1">
+                                                    <img src={`/${networkName.toLowerCase()}.png`} className="img-fluid mx-auto rounded" width={40} height={40} />
+                                                </div>
+                                            <h3 className="card-text text-center">NGN{category.amount.toLocaleString()}</h3>
+                                            {
+                                                <p className="text-center">{category.biller_name}</p>
+                                            }
+                                            <FlutterwavePayment amount={category.amount} item_code={category.item_code} biller_code={category.biller_code} biller_name={category.biller_name} phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Bills'} description={'Payment for Bills'} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>)
+                            }
+                        </>) : (<></>)
+                    }
+
+                    {
+                        type === 'Airtime' && !isAirtime && networkName === 'Glo' ? (<>
+                         {
+                                isLoading ? <div><LoadingSpinner /></div> : ( <div className="row ml-2">
+                                {
+                                    
+                                billerCategory && billerCategory.filter(item => item.biller_code === 'BIL109').map(category => (
+                                    <div className="col-md-4 mb-3">
+                                        <div className="card bg-light" style={{width: '22rem', height: '13rem'}}>
+                                            <div className="card-body">
+                                                <div className="d-flex justify-content-center mb-1">
+                                                    <img src={`/${networkName.toLowerCase()}.png`} className="img-fluid mx-auto rounded" width={40} height={40} />
+                                                </div>
+                                            <h3 className="card-text text-center">NGN{category.amount.toLocaleString()}</h3>
+                                            {
+                                                <p className="text-center">{category.biller_name}</p>
+                                            }
+                                            <FlutterwavePayment amount={category.amount} item_code={category.item_code} biller_code={category.biller_code} biller_name={category.biller_name} phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Bills'} description={'Payment for Bills'} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>)
+                            }
+                        </>) : (<></>)
+                    }
+
+{
+                        type === 'Airtime' && !isAirtime && networkName === '9Mobile' ? (<>
+                         {
+                                isLoading ? <div><LoadingSpinner /></div> : ( <div className="row ml-2">
+                                {
+                                    
+                                billerCategory && billerCategory.filter(item => item.biller_code === 'BIL111').map(category => (
+                                    <div className="col-md-4 mb-3">
+                                        <div className="card bg-light" style={{width: '22rem', height: '13rem'}}>
+                                            <div className="card-body">
+                                                <div className="d-flex justify-content-center mb-1">
+                                                    <img src={`/${networkName.toLowerCase()}.png`} className="img-fluid mx-auto rounded" width={40} height={40} />
+                                                </div>
+                                            <h3 className="card-text text-center">NGN{category.amount.toLocaleString()}</h3>
+                                            {
+                                                <p className="text-center">{category.biller_name}</p>
+                                            }
+                                            <FlutterwavePayment amount={category.amount} item_code={category.item_code} biller_code={category.biller_code} biller_name={category.biller_name} phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Bills'} description={'Payment for Bills'} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>)
+                            }
+                        </>) : (<></>)
                     }
 
                     {
