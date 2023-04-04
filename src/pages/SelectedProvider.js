@@ -83,7 +83,7 @@ const SelectedProvider = () => {
         })
         .catch(function (error) {
             setIsLoading(false);
-            setErrorMessage("Unable to fetch user list");
+            setErrorMessage("Unable to fetch Bills");
             console.log('Error message; ', error.response.data.message)
             console.log('error: ',error);
             if(error.response.data.message === 'Unauthenticated') {
@@ -175,7 +175,7 @@ const SelectedProvider = () => {
                                         <div className="card bg-light" style={{width: '22rem', height: '13rem'}}>
                                             <div className="card-body">
                                                 <div className="d-flex justify-content-center mb-1">
-                                                    <img src={`/${networkName.toLowerCase()}.png`} className="img-fluid mx-auto rounded" width={40} height={40} />
+                                                    <img src={`/${networkName.toLowerCase()}.png`} className="img-fluid mx-auto rounded" width={40} height={40} alt="" />
                                                 </div>
                                             <h3 className="card-text text-center">NGN{category.amount.toLocaleString()}</h3>
                                             {
@@ -202,7 +202,7 @@ const SelectedProvider = () => {
                                         <div className="card bg-light" style={{width: '22rem', height: '13rem'}}>
                                             <div className="card-body">
                                                 <div className="d-flex justify-content-center mb-1">
-                                                    <img src={`/${networkName.toLowerCase()}.png`} className="img-fluid mx-auto rounded" width={40} height={40} />
+                                                    <img src={`/${networkName.toLowerCase()}.png`} className="img-fluid mx-auto rounded" width={40} height={40} alt="" />
                                                 </div>
                                             <h3 className="card-text text-center">NGN{category.amount.toLocaleString()}</h3>
                                             {
@@ -229,7 +229,7 @@ const SelectedProvider = () => {
                                         <div className="card bg-light" style={{width: '22rem', height: '13rem'}}>
                                             <div className="card-body">
                                                 <div className="d-flex justify-content-center mb-1">
-                                                    <img src={`/${networkName.toLowerCase()}.png`} className="img-fluid mx-auto rounded" width={40} height={40} />
+                                                    <img src={`/${networkName.toLowerCase()}.png`} className="img-fluid mx-auto rounded" width={40} height={40} alt="" />
                                                 </div>
                                             <h3 className="card-text text-center">NGN{category.amount.toLocaleString()}</h3>
                                             {
@@ -256,7 +256,7 @@ const SelectedProvider = () => {
                                         <div className="card bg-light" style={{width: '22rem', height: '13rem'}}>
                                             <div className="card-body">
                                                 <div className="d-flex justify-content-center mb-1">
-                                                    <img src={`/${networkName.toLowerCase()}.png`} className="img-fluid mx-auto rounded" width={40} height={40} />
+                                                    <img src={`/${networkName.toLowerCase()}.png`} className="img-fluid mx-auto rounded" width={40} height={40} alt="" />
                                                 </div>
                                             <h3 className="card-text text-center">NGN{category.amount.toLocaleString()}</h3>
                                             {
@@ -283,7 +283,7 @@ const SelectedProvider = () => {
                                         <div className="card bg-light" style={{width: '22rem', height: '13rem'}}>
                                             <div className="card-body">
                                                 <div className="d-flex justify-content-center mb-1">
-                                                    <img src={`/${networkName.toLowerCase()}.png`} className="img-fluid mx-auto rounded" width={40} height={40} />
+                                                    <img src={`/${networkName.toLowerCase()}.png`} className="img-fluid mx-auto rounded" width={40} height={40} alt="" />
                                                 </div>
                                             <h3 className="card-text text-center">NGN{category.amount.toLocaleString()}</h3>
                                             {
@@ -348,7 +348,7 @@ const SelectedProvider = () => {
                                         <div className="card bg-light" style={{width: '22rem', height: '13rem'}}> 
                                             <div className="card-body">
                                                 <div className="d-flex justify-content-center mb-1">
-                                                <img src={`/${networkName.toLowerCase()}.png`} className="img-fluid mx-auto rounded" width={40} height={40} />
+                                                <img src={`/${networkName.toLowerCase()}.png`} className="img-fluid mx-auto rounded" width={40} height={40} alt="" />
                                                 </div>
                                             <h3 className="card-text text-center">NGN{category.amount.toLocaleString()}</h3> 
                                             {
