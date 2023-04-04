@@ -138,6 +138,7 @@ const SelectedProvider = () => {
                                                         <img src={`/${networkName.toLowerCase()}.png`} className="img-fluid mx-auto rounded" alt={item.networkName} width={40} height={40} />
                                                     </div>
                                                     <h3 className="card-text text-center">NGN{item.amount.toLocaleString()}</h3>
+                                                    <p className="text-center">Airtime</p>
                                                     {
                                                         <p className="text-center"></p>
                                                     }
