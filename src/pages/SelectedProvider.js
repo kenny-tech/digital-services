@@ -47,11 +47,23 @@ const SelectedProvider = () => {
         },
         {
             "id": 5,
-            "amount": 2000
+            "amount": 1500
         },
         {
             "id": 6,
+            "amount": 2000
+        },
+        {
+            "id": 7,
             "amount": 3000
+        },
+        {
+            "id": 8,
+            "amount": 4000
+        },
+        {
+            "id": 9,
+            "amount": 5000
         },
     ]
 
