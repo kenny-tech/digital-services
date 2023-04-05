@@ -31,7 +31,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
         customizations: {
           title: title,
           description: description,
-          logo: 'https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg',
+          logo: 'https://digitalstore.cakamba.com/logo.jpeg',
         },
     };
     
