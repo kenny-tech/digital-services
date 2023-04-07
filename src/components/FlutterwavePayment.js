@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { successAlert,  errorAlert} from "../services/alert";
 
 const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardNo, item_code, biller_code, biller_name}) => {
-
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     let phone = '+234'+phoneNumber.substring(1);
@@ -32,7 +31,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
         customizations: {
           title: title,
           description: description,
-          logo: 'https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg',
+          logo: 'https://digitalstore.cakamba.com/logo.jpeg',
         },
     };
     
@@ -41,13 +40,13 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
     const handleBuyNow = () => {
         // console.log('Phone number: ', phone);
         setLoading(true);
-        if(phoneNumber.length !== 11 && title == 'Buy Airtime') {
+        if(phoneNumber.length !== 11 && (title === 'Buy Airtime' || title === 'Buy Data')) {
             alert('Phone number cannot be blank and must be 11 digits.');
             setLoading(false);
             navigate(0);
         } 
 
-        if(smartCardNo.length !== 10 && title == 'Pay Bills') {
+        if(smartCardNo.length !== 10 && title === 'Pay Bills') {
             alert('Smart card number cannot be blank and must be 10 digits.');
             setLoading(false);
             navigate(0);

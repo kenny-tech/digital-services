@@ -9,7 +9,7 @@ const Airtime = () => {
             <div className="d-flex justify-content-center h-auto airtimeContainer">
             <div className="mt-5 ml-3 mr-3">
                     <img src="/airtime-recharge.jpeg" className="img-fluid rounded" alt="Airtime" />
-                    <h2 className="text-center mt-3">Recharge Airtime</h2>
+                    <h2 className="text-center mt-3">Buy Airtime/Data</h2>
                     <p className="text-center">Top up your phone on any network</p>
                     {
                         localStorage.getItem('token') !== null ? ( <Link to="provider" state={{ type: "Airtime" }}>
