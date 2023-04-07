@@ -295,25 +295,6 @@ const SelectedProvider = () => {
                                             </div>
                                         ))}
                                 </div>)
-
-                                // dstvBillsAmount.map(item => {
-                                //     return (
-                                //         <div className="col-md-4 mb-3">
-                                //             <div className="card bg-light" style={{width: '22rem', height: '13rem'}}>
-                                //                 <div className="card-body">
-                                //                     <div className="d-flex justify-content-center mb-1">
-                                //                         <img src={`/${networkName}.png`} className="img-fluid mx-auto rounded" alt={item.networkName} width={40} height={40} />
-                                //                     </div>
-                                //                     <h3 className="card-text text-center">NGN{item.amount.toLocaleString()}</h3>
-                                //                     {
-                                //                         <p className="text-center">{item.label}</p>
-                                //                     }
-                                //                     <FlutterwavePayment amount={item.amount} phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Bills'} description={'Payment for Bills'} />
-                                //                 </div>
-                                //             </div>
-                                //         </div>
-                                //     )
-                                // })
                             }
                         </>
                         ) : null
@@ -322,25 +303,6 @@ const SelectedProvider = () => {
                     {
                         type === 'Bills' && networkName === 'GoTv' ? (<>
                             {
-
-                                // gotvBillsAmount.map(item => {
-                                //     return (
-                                //         <div className="col-md-4 mb-3">
-                                //             <div className="card bg-light" style={{width: '22rem', height: '13rem'}}>
-                                //                 <div className="card-body">
-                                //                     <div className="d-flex justify-content-center mb-1">
-                                //                         <img src={`/${networkName}.png`} className="img-fluid mx-auto rounded" alt={item.networkName} width={40} height={40} />
-                                //                     </div>
-                                //                     <h3 className="card-text text-center">NGN{item.amount.toLocaleString()}</h3>
-                                //                     {
-                                //                         <p className="text-center">{item.label}</p>
-                                //                     }
-                                //                     <FlutterwavePayment amount={item.amount} phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Bills'} description={'Payment for Bills'} />
-                                //                 </div>
-                                //             </div>
-                                //         </div>
-                                //     )
-                                // })
                                 isLoading ? <div><LoadingSpinner /></div> : (<div className="row ml-2">
                                     {
                                         billerCategory && billerCategory.filter(item => (item.biller_name.split(" ")[0] === 'GOTV' || item.biller_name.split(" ")[0] === 'GOtv') && item.country === 'NG').map(category => (
