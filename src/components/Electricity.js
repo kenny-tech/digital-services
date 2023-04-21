@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
   
 import '../css/Airtime.css';
 
-const Airtime = () => {
+const Electricity = () => {
     return (
         <div className="col-md-3 mb-3">
             <div className="d-flex justify-content-center h-auto airtimeContainer">
             <div className="mt-5 ml-3 mr-3">
-                    <img src="/airtime-recharge.jpeg" className="img-fluid rounded" alt="Airtime" />
-                    <h4 className="text-center mt-3">Airtime/Data</h4>
-                    <p className="text-center">Buy Airtime/Data on any network</p>
+                    <img src="/electricity.png" className="img-fluid rounded" alt="Airtime" />
+                    <h4 className="text-center mt-3">Electricity</h4>
+                    <p className="text-center">Pay your Electricity Bills</p>
                     {
                         localStorage.getItem('token') !== null ? ( <Link to="provider" state={{ type: "Airtime" }}>
                         <button type="button" className="btn btn-success btn-lg btn-block mb-5">Buy Now</button>
@@ -24,4 +24,4 @@ const Airtime = () => {
     )
 }
 
-export default Airtime;
+export default Electricity;
