@@ -50,9 +50,9 @@ export const Route = createBrowserRouter([
   },
 ]);
 
-export const BASE_API_ROUTE = 'http://localhost:8000/api/';
+// export const BASE_API_ROUTE = 'http://localhost:8000/api/';
 
-// export const BASE_API_ROUTE = 'https://digitalstore-backend.cakamba.com/api/';
+export const BASE_API_ROUTE = 'https://digitalstore-backend.cakamba.com/api/';
 
 export const REGISTER_API_ROUTE = 'register';
 export const ACTIVATE_ACCOUNT_API_ROUTE = 'activate_account';
