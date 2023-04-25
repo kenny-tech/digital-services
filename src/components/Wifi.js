@@ -8,7 +8,7 @@ const Wifi = () => {
         <div className="col-md-3 mb-3">
             <div className="d-flex justify-content-center h-auto billsContainer">
                 <div className="mt-5 ml-3 mr-3">
-                    <img src="/wifi.png" className="img-fluid rounded" alt="TV Subscription" />
+                    <img src="/wifi.jpeg" className="img-fluid rounded" alt="WiFi" />
                     <h4 className="text-center mt-3">WiFi</h4>
                     <p className="text-center">Renew your WiFi Subscription</p>
                     {
