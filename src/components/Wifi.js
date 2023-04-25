@@ -12,7 +12,7 @@ const Wifi = () => {
                     <h4 className="text-center mt-3">WiFi</h4>
                     <p className="text-center">Renew your WiFi Subscription</p>
                     {
-                        localStorage.getItem('token') !== null ? ( <Link to="provider" state={{ type: "Bills" }}>
+                        localStorage.getItem('token') !== null ? ( <Link to="provider" state={{ type: "Wifi" }}>
                             <button type="button" className="btn btn-success btn-lg btn-block mb-5">Renew Now</button>
                         </Link>) : (<Link to="login">
                             <button type="button" className="btn btn-success btn-lg btn-block mb-5">Buy Now</button>

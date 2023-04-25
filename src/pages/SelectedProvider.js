@@ -129,10 +129,24 @@ const SelectedProvider = () => {
                                     <option value={'Airtime'}>Airtime</option>
                                     <option value={'Data'}>Data</option>
                                 </select>
-                            </div></>) : (<div className="form-group">
-                                <label for="phone">{'Enter Smart Card Number'}</label>
-                                <input type="number" max={11} className="form-control" style={{ width: '70%' }} id="phone" placeholder={'Smart Card Number'} onChange={e => setSmartCardNo(e.target.value)} required={true} />
-                            </div>)
+                            </div></>) : (<></>)
+                    }
+
+                    {
+                        type === 'Bills' ? (<><div className="form-group">
+                            <label for="phone">{'Enter Smart Card Number'}</label>
+                            <input type="number" max={11} className="form-control" style={{ width: '70%' }} id="phone" placeholder={'Smart Card Number'} onChange={e => setSmartCardNo(e.target.value)} required={true} />
+                        </div></>) : (<></>)
+                    }
+
+                    {
+                        type === 'Electricity' ? (<><div className="form-group">
+                            <label for="phone">{'Enter Meter Number'}</label>
+                            <input type="number" max={11} className="form-control" style={{ width: '70%' }} id="phone" placeholder={'Meter Number'} onChange={e => setSmartCardNo(e.target.value)} required={true} />
+                            <br />
+                            <label for="phone">{'Enter Amount'}</label>
+                            <input type="amount" max={11} className="form-control" style={{ width: '70%' }} id="phone" placeholder={'Amount'} onChange={e => setSmartCardNo(e.target.value)} required={true} />
+                        </div></>) : (<></>)
                     }
                 </div>
 
@@ -328,8 +342,8 @@ const SelectedProvider = () => {
                         ) : null
                     }
 
-                {
-                        type === 'Bills' && networkName === 'Electricity' ? (<>
+                    {
+                        type === 'Electricity' && networkName === 'Electricity' ? (<>
                             {
                                 isLoading ? <div><LoadingSpinner /></div> : (<div className="row ml-2">
                                     {
@@ -337,10 +351,9 @@ const SelectedProvider = () => {
                                             <div className="col-md-4 mb-3">
                                                 <div className="card bg-light" style={{ width: '22rem', height: '13rem' }}>
                                                     <div className="card-body">
-                                                        <div className="d-flex justify-content-center mb-1">
-                                                            <img src={`/${networkName.toLowerCase()}.png`} className="img-fluid mx-auto rounded" width={40} height={40} alt="" />
+                                                        <div className="d-flex justify-content-center mb-3">
+                                                            <img src={`/${networkName.toLowerCase()}.jpeg`} className="img-fluid mx-auto rounded" width={40} height={40} alt="" />
                                                         </div>
-                                                        <h3 className="card-text text-center">NGN{category.amount.toLocaleString()}</h3>
                                                         {
                                                             <p className="text-center">{category.biller_name}</p>
                                                         }

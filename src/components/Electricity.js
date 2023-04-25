@@ -12,7 +12,7 @@ const Electricity = () => {
                     <h4 className="text-center mt-3">Electricity</h4>
                     <p className="text-center">Pay your Electricity Bills</p>
                     {
-                        localStorage.getItem('token') !== null ? ( <Link to="/selected-provider" state={{ networkName: "Electricity", type: "Bills" }}>
+                        localStorage.getItem('token') !== null ? ( <Link to="/selected-provider" state={{ networkName: "Electricity", type: "Electricity" }}>
                         <button type="button" className="btn btn-success btn-lg btn-block mb-5">Buy Now</button>
                     </Link>) : (<Link to="login">
                         <button type="button" className="btn btn-success btn-lg btn-block mb-5">Buy Now</button>

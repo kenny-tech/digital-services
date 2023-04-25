@@ -40,7 +40,11 @@ const Provider = () => {
                         <InfoBox title="Excellent ratings and reviews" content="Our customers have provided us with over 1 million excellent ratings and reviews." image="/five-star-rating.png" />
                         <InfoBox title="We are trusted, Pay safely & securely" content="Your Order gets you in seconds using your favourite payment option." image="/secure.png" />
                     </div>
-                </div>) : (<div className="row no-gutters mt-5">
+                </div>) : (<></>)
+                }
+
+                {
+                    type === 'Bills' ? (<div className="row no-gutters mt-5">
                     <div className="col-12">
                         <p className="ml-3">Select a Provider</p>
                     </div>
@@ -50,7 +54,21 @@ const Provider = () => {
                     <Link to="/selected-provider" state={{ networkName: "GoTv", type: "Bills" }}>
                         <Network name="GoTV" image="/gotv.png" />
                     </Link>
-                </div>)
+                </div>) : (<></>)
+                }
+                
+                {
+                    type === 'Wifi' ? (<div className="row no-gutters mt-5">
+                    <div className="col-12">
+                        <p className="ml-3">Select a Provider</p>
+                    </div>
+                    <Link to="/selected-provider" state={{ networkName: "GoTv", type: "Bills" }}>
+                        <Network name="Smile" image="/smile.png" />
+                    </Link>
+                    <Link to="/selected-provider" state={{ networkName: "Wifi", type: "Wifi" }}>
+                        <Network name="ipNx" image="/ipnx.jpeg" />
+                    </Link>
+                </div>) : (<></>)
                 }
             </div>
         </div>
