@@ -52,6 +52,18 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
             navigate(0);
         } 
 
+        if(meterNumber.length === 0 && customAmount.length === 0 && title === 'Pay Electricity') {
+            alert('Meter number and Amount are both required');
+            setLoading(false);
+            navigate(0);
+        }
+
+        if(accountNumber.length === 0 && title === 'Pay Wifi') {
+            alert('Account Number is required');
+            setLoading(false);
+            navigate(0);
+        }
+
         if(title === 'Pay Bills') {
             validateCustomer(item_code, biller_code, smartCardNo);
         } 

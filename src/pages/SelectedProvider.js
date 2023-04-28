@@ -124,7 +124,7 @@ const SelectedProvider = () => {
                     {
                         type === 'Airtime' ? (<><div className="form-group">
                             <label for="">{'Phone Number'}</label>
-                            <input type="number" max={11} className="form-control" style={{ width: '70%' }} id="phone" placeholder={'Phone number'} onChange={e => setPhoneNumber(e.target.value)} required={true} />
+                            <input type="number" max={11} className="form-control" style={{ width: '70%' }} id="" placeholder={'Phone number'} onChange={e => setPhoneNumber(e.target.value)} value={phoneNumber} required={true} />
                         </div>
                             <div className="form-group">
                                 <label for="type">{'Select whether Airtime or Data'}</label>
@@ -138,24 +138,24 @@ const SelectedProvider = () => {
                     {
                         type === 'Bills' ? (<><div className="form-group">
                             <label for="">{'Enter Smart Card Number'}</label>
-                            <input type="number" max={11} className="form-control" style={{ width: '70%' }} id="phone" placeholder={'Smart Card Number'} onChange={e => setSmartCardNo(e.target.value)} required={true} />
+                            <input type="number" max={11} className="form-control" style={{ width: '70%' }} id="" value={smartCardNo} placeholder={'Smart Card Number'} onChange={e => setSmartCardNo(e.target.value)} required={true} />
                         </div></>) : (<></>)
                     }
 
                     {
                         type === 'Electricity' ? (<><div className="form-group">
                             <label for="">{'Enter Meter Number'}</label>
-                            <input type="number" max={11} className="form-control" style={{ width: '70%' }} id="phone" placeholder={'Meter Number'} onChange={e => setSmartCardNo(e.target.value)} required={true} />
+                            <input type="number" max={11} className="form-control" style={{ width: '70%' }} id="" placeholder={'Meter Number'} onChange={e => setMeterNumber(e.target.value)} value={meterNumber} required={true} />
                             <br />
                             <label for="">{'Enter Amount'}</label>
-                            <input type="amount" max={11} className="form-control" style={{ width: '70%' }} id="amount" placeholder={'Amount'} onChange={e => setSmartCardNo(e.target.value)} required={true} />
+                            <input type="amount" max={11} className="form-control" style={{ width: '70%' }} id="" placeholder={'Amount'} onChange={e => setCustomAmount(e.target.value)} value={customAmount} required={true} />
                         </div></>) : (<></>)
                     }
 
                     {   
                         type === 'Wifi' ? (<><div className="form-group">
                             <label for="">{'Enter Account Number'}</label>
-                            <input type="number" max={11} className="form-control" style={{ width: '70%' }} id="account_number" placeholder={'Account Number'} onChange={e => setSmartCardNo(e.target.value)} required={true} />
+                            <input type="number" max={11} className="form-control" style={{ width: '70%' }} id="" value={accountNumber} placeholder={'Account Number'} onChange={e => setAccountNumber(e.target.value)} required={true} />
                         </div></>) : (<></>)
                     }
                 </div>
