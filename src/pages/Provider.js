@@ -62,10 +62,10 @@ const Provider = () => {
                     <div className="col-12">
                         <p className="ml-3">Select a Provider</p>
                     </div>
-                    <Link to="/selected-provider" state={{ networkName: "GoTv", type: "Bills" }}>
+                    <Link to="/selected-provider" state={{ networkName: "Smile", type: "Wifi" }}>
                         <Network name="Smile" image="/smile.png" />
                     </Link>
-                    <Link to="/selected-provider" state={{ networkName: "Wifi", type: "Wifi" }}>
+                    <Link to="/selected-provider" state={{ networkName: "ipNX", type: "Wifi" }}>
                         <Network name="ipNx" image="/ipnx.jpeg" />
                     </Link>
                 </div>) : (<></>)

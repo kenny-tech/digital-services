@@ -5,7 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { successAlert,  errorAlert} from "../services/alert";
 
-const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardNo, item_code, biller_code, biller_name}) => {
+const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardNo, item_code, biller_code, biller_name, meterNumber, accountNumber, customAmount}) => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     let phone = '+234'+phoneNumber.substring(1);
