@@ -17,6 +17,10 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
         'Authorization': `Bearer ${usertoken}`
     }
 
+    if(title === 'Payment for Electricity') {
+        amount = customAmount;
+    }
+
     const config = {
         public_key: 'FLWPUBK-6c675eeb5e923f572a94c100503d0fe1-X',
         tx_ref: Date.now(),
@@ -38,7 +42,6 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
     const handleFlutterPayment = useFlutterwave(config);
 
     const handleBuyNow = () => {
-        // console.log('Phone number: ', phone);
         setLoading(true);
         if(phoneNumber.length !== 11 && (title === 'Buy Airtime' || title === 'Buy Data')) {
             alert('Phone number cannot be blank and must be 11 digits.');
@@ -52,13 +55,13 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
             navigate(0);
         } 
 
-        if(meterNumber.length === 0 && customAmount.length === 0 && title === 'Pay Electricity') {
+        if(meterNumber.length === 0 && customAmount.length === 0 && title === 'Payment for Electricity') {
             alert('Meter number and Amount are both required');
             setLoading(false);
             navigate(0);
         }
 
-        if(accountNumber.length === 0 && title === 'Pay Wifi') {
+        if(accountNumber.length === 0 && title === 'Payment for Wifi') {
             alert('Account Number is required');
             setLoading(false);
             navigate(0);

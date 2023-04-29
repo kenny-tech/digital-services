@@ -367,7 +367,7 @@ const SelectedProvider = () => {
                                                         {
                                                             <p className="text-center">{category.biller_name}</p>
                                                         }
-                                                        <FlutterwavePayment amount={category.amount} item_code={category.item_code} biller_code={category.biller_code} biller_name={category.biller_name} phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Electricity'} description={'Payment for Electricity'} meterNumber={''} accountNumber={''} customAmount={''}/>
+                                                        <FlutterwavePayment amount={category.amount} item_code={category.item_code} biller_code={category.biller_code} biller_name={category.biller_name} phoneNumber={''} smartCardNo={smartCardNo} title={'Payment for Electricity'} description={'Payment for Electricity'} meterNumber={meterNumber} accountNumber={''} customAmount={customAmount}/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -395,7 +395,7 @@ const SelectedProvider = () => {
                                                         {
                                                             <p className="text-center">{category.biller_name}</p>
                                                         }
-                                                        <FlutterwavePayment amount={category.amount} item_code={category.item_code} biller_code={category.biller_code} biller_name={category.biller_name} phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Wifi'} description={'Payment for Wifi'} meterNumber={''} accountNumber={''} customAmount={''} />
+                                                        <FlutterwavePayment amount={category.amount} item_code={category.item_code} biller_code={category.biller_code} biller_name={category.biller_name} phoneNumber={''} smartCardNo={smartCardNo} title={'Payment for Wifi'} description={'Payment for Wifi'} meterNumber={''} accountNumber={accountNumber} customAmount={''} />
                                                     </div>
                                                 </div>
                                             </div>
@@ -423,7 +423,7 @@ const SelectedProvider = () => {
                                                         {
                                                             <p className="text-center">{category.biller_name}</p>
                                                         }
-                                                        <FlutterwavePayment amount={category.amount} item_code={category.item_code} biller_code={category.biller_code} biller_name={category.biller_name} phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Wifi'} description={'Payment for Wifi'} meterNumber={''} accountNumber={''} customAmount={''}/>
+                                                        <FlutterwavePayment amount={category.amount} item_code={category.item_code} biller_code={category.biller_code} biller_name={category.biller_name} phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Wifi'} description={'Payment for Wifi'} meterNumber={''} accountNumber={accountNumber} customAmount={''}/>
                                                     </div>
                                                 </div>
                                             </div>
