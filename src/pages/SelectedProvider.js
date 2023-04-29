@@ -353,6 +353,34 @@ const SelectedProvider = () => {
                     }
 
                     {
+                        type === 'Bills' && networkName === 'StarTimes' ? (<>
+                            {
+                                isLoading ? <div><LoadingSpinner /></div> : (<div className="row ml-2">
+                                    {
+                                        billerCategory && billerCategory.filter(item => (item.biller_name.split(" ")[0] === 'Startime' || item.biller_name.split(" ")[0] === 'STARTIMES') && item.country === 'NG').map(category => (
+                                            <div className="col-md-4 mb-3">
+                                                <div className="card bg-light" style={{ width: '22rem', height: '13rem' }}>
+                                                    <div className="card-body">
+                                                        <div className="d-flex justify-content-center mb-1">
+                                                            <img src={`/${networkName.toLowerCase()}.png`} className="img-fluid mx-auto rounded" width={40} height={40} alt="" />
+                                                        </div>
+                                                        <h3 className="card-text text-center">NGN{category.amount.toLocaleString()}</h3>
+                                                        {
+                                                            <p className="text-center">{category.biller_name}</p>
+                                                        }
+                                                        <FlutterwavePayment amount={category.amount} item_code={category.item_code} biller_code={category.biller_code} biller_name={category.biller_name} phoneNumber={''} smartCardNo={smartCardNo} title={'Pay Bills'} description={'Payment for Bills'} meterNumber={''} accountNumber={''} customAmount={''} />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                </div>)
+
+                            }
+                        </>
+                        ) : null
+                    }
+
+                    {
                         type === 'Electricity' && networkName === 'Electricity' ? (<>
                             {
                                 isLoading ? <div><LoadingSpinner /></div> : (<div className="row ml-2">
