@@ -101,6 +101,8 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
                             phone_number: phone,
                             smart_card_number: smartCardNo,
                             biller_name: biller_name,
+                            meter_number: meterNumber, 
+                            account_number: accountNumber
                         }
 
                         // console.log('Payment data: ', data);
