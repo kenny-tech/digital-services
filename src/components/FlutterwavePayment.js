@@ -3,7 +3,7 @@ import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
 import { BASE_API_ROUTE, MAKE_PAYMENT_API_ROUTE, VERIFY_PAYMENT_API_ROUTE, VALIDATE_CUSTOMER_API_ROUTE } from "../Route";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { successAlert, errorAlert } from "../services/alert";
+import { successAlert, errorAlert, infoAlert } from "../services/alert";
 
 const FlutterwavePayment = ({ amount, phoneNumber, title, description, smartCardNo, item_code, biller_code, biller_name, meterNumber, accountNumber, customAmount }) => {
     const navigate = useNavigate();
@@ -44,27 +44,35 @@ const FlutterwavePayment = ({ amount, phoneNumber, title, description, smartCard
     const handleBuyNow = () => {
         setLoading(true);
         if (phoneNumber.length !== 11 && (title === 'Buy Airtime' || title === 'Buy Data')) {
-            alert('Phone number cannot be blank and must be 11 digits.');
-            setLoading(false);
-            navigate(0);
+            errorAlert('Phone number cannot be blank and must be 11 digits.');
+            setTimeout(() => {
+                navigate(0);
+            }, 5000);
+            return;
         }
 
-        if (smartCardNo.length !== 10 && title === 'Pay Bills') {
-            alert('Smart card number cannot be blank and must be 10 digits.');
-            setLoading(false);
-            navigate(0);
+        if (smartCardNo.length !== 10 && title === 'Pay Bills') {           
+            errorAlert('Smart card number cannot be blank and must be 10 digits.');
+            setTimeout(() => {
+                navigate(0);
+            }, 5000);
+            return;
         }
 
         if (meterNumber.length === 0 && customAmount.length === 0 && title === 'Payment for Electricity') {
-            alert('Meter number and Amount are both required');
-            setLoading(false);
-            navigate(0);
+            errorAlert('Meter number and Amount are both required');
+            setTimeout(() => {
+                navigate(0);
+            }, 5000);
+            return;       
         }
 
         if (accountNumber.length === 0 && title === 'Payment for Wifi') {
-            alert('Account Number is required');
-            setLoading(false);
-            navigate(0);
+            errorAlert('Account Number is required');
+            setTimeout(() => {
+                navigate(0);
+            }, 5000);
+            return;       
         }
 
         if (title === 'Pay Bills' || title === 'Payment for Electricity' || title === 'Payment for Wifi') {
@@ -84,59 +92,66 @@ const FlutterwavePayment = ({ amount, phoneNumber, title, description, smartCard
                 try {
                     const customerData = await validateCustomer(item_code, biller_code, customer);
                     if (customerData && customerData.response_code === "00") {
-                        alert(`Payment for ${smartCardNo} (${customerData.name}). Amount - NGN${amount.toLocaleString()}`);
-                        handleFlutterPayment({
-                            callback: (response) => {
-                
-                                let txref_data = {
-                                    tx_ref: response.tx_ref,
-                                }
-                
-                                // verify payment
-                                axios.post(`${BASE_API_ROUTE}${VERIFY_PAYMENT_API_ROUTE}`, txref_data, {
-                                    headers: headers
-                                })
-                                    .then(function (response) {
-                                        // if payment is successfully verified, save payment and recharge number
-                                        console.log('Successful payment response : ', response);
-                                        if (response.data.status === 'success') {
-                                            let data = {
-                                                payment_title: title,
-                                                user_id: localStorage.getItem('user_id'),
-                                                status: response.data.data.status,
-                                                tx_ref: response.data.data.tx_ref,
-                                                response_code: response.data.data.charge_response_code,
-                                                amount: response.data.data.amount,
-                                                flw_ref: response.data.data.flw_ref,
-                                                transaction_id: response.data.data.transaction_id,
-                                                currency: response.data.data.currency,
-                                                payment_date: response.data.data.created_at,
-                                                phone_number: phone,
-                                                smart_card_number: smartCardNo,
-                                                biller_name: biller_name,
-                                                meter_number: meterNumber,
-                                                account_number: accountNumber
-                                            }
-                
-                                            // console.log('Payment data: ', data);
-                
-                                            savePaymentAndRechargeNumber(data);
-                
-                                            closePaymentModal() // this will close the modal programmatically
-                                        }
-                                        setLoading(false);
+                        // alert(`Payment for ${smartCardNo} (${customerData.name}). Amount - NGN${amount.toLocaleString()}`);
+                        infoAlert(`Payment for ${smartCardNo} (${customerData.name}). Amount - NGN${amount.toLocaleString()}`)
+                        setTimeout(() => {
+                            handleFlutterPayment({
+                                callback: (response) => {
+                    
+                                    let txref_data = {
+                                        tx_ref: response.tx_ref,
+                                    }
+                    
+                                    // verify payment
+                                    axios.post(`${BASE_API_ROUTE}${VERIFY_PAYMENT_API_ROUTE}`, txref_data, {
+                                        headers: headers
                                     })
-                                    .catch(function (error) {
-                                        // console.log('Error payment : ',error);
-                                        setLoading(false);
-                                        errorAlert(error.response.data.message);
-                                    });
-                            },
-                            onClose: () => { },
-                        });
+                                        .then(function (response) {
+                                            // if payment is successfully verified, save payment and recharge number
+                                            console.log('Successful payment response : ', response);
+                                            if (response.data.status === 'success') {
+                                                let data = {
+                                                    payment_title: title,
+                                                    user_id: localStorage.getItem('user_id'),
+                                                    status: response.data.data.status,
+                                                    tx_ref: response.data.data.tx_ref,
+                                                    response_code: response.data.data.charge_response_code,
+                                                    amount: response.data.data.amount,
+                                                    flw_ref: response.data.data.flw_ref,
+                                                    transaction_id: response.data.data.transaction_id,
+                                                    currency: response.data.data.currency,
+                                                    payment_date: response.data.data.created_at,
+                                                    phone_number: phone,
+                                                    smart_card_number: smartCardNo,
+                                                    biller_name: biller_name,
+                                                    meter_number: meterNumber,
+                                                    account_number: accountNumber
+                                                }
+                    
+                                                // console.log('Payment data: ', data);
+                    
+                                                savePaymentAndRechargeNumber(data);
+                    
+                                                closePaymentModal() // this will close the modal programmatically
+                                            }
+                                            setLoading(false);
+                                        })
+                                        .catch(function (error) {
+                                            // console.log('Error payment : ',error);
+                                            setLoading(false);
+                                            errorAlert(error.response.data.message);
+                                        });
+                                },
+                                onClose: () => { },
+                            });
+                        }, 5000);
                     } else {
-                        alert(`The number (${customer}) is not correct. Please check and try again.`);
-                        navigate(0);
+                        errorAlert(`The number (${customer}) is not correct. Please check and try again.`);
+                        // alert(`The number (${customer}) is not correct. Please check and try again.`);
+                        setTimeout(() => {
+                            navigate(0);
+                        }, 5000);
+                        
                     }
                 } catch (error) {
                     console.log('Error occurred while validating customer: ', error);

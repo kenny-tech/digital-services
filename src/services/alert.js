@@ -5,7 +5,7 @@ export const successAlert = (message) => {
         title: 'Good job!',
         text: message,
         icon: 'success',
-        // confirmButtonColor: '#3949AB',
+        confirmButtonColor: '#3949AB',
         confirmButtonText: 'OK'
     })
 }
@@ -15,7 +15,17 @@ export const errorAlert = (message) => {
         title: 'Oops...',
         text: message,
         icon: 'error',
-        // confirmButtonColor: '#3949AB',
+        confirmButtonColor: '#3949AB',
+        confirmButtonText: 'OK'
+    })
+}
+
+export const infoAlert = (message) => {
+    Swal.fire({
+        title: 'Confirmation',
+        text: message,
+        icon: 'info',
+        confirmButtonColor: '#3949AB',
         confirmButtonText: 'OK'
     })
 }
