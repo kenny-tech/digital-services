@@ -22,11 +22,12 @@ const ActivateAccount = () => {
         // console.log('active: ',response.data);
 
           if(response.data.success === true) {
-              Swal.fire(
-                  'Good job!',
-                  response.data.message,
-                  'success'
-                ).then((result) => {
+              Swal.fire({
+                  title: 'Good job!',
+                  text: response.data.message,
+                  icon: 'success',
+                  confirmButtonColor: '#3949AB'
+              }).then((result) => {
                     if (result.isConfirmed) {
                         window.location.href = "/login";
                     }

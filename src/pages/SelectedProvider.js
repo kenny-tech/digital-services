@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { BASE_API_ROUTE, GET_BILL_CATEGORIES_API_ROUTE } from "../Route";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 
 import Navigation from "../components/Navigation";
 import FlutterwavePayment from "../components/FlutterwavePayment";
@@ -92,14 +91,14 @@ const SelectedProvider = () => {
                 setErrorMessage("Unable to fetch Bills");
                 console.log('Error message; ', error.response.data.message)
                 console.log('error: ', error);
-                if (error.response.data.message === 'Unauthenticated') {
-                    Swal.fire(
-                        'Error!',
-                        'Your session has expired. Please login again to continue.',
-                        'error'
-                    )
-                    navigate('/login');
-                }
+                // if (error.response.data.message === 'Unauthenticated') {
+                //     Swal.fire(
+                //         'Error!',
+                //         'Your session has expired. Please login again to continue.',
+                //         'error'
+                //     )
+                //     navigate('/login');
+                // }
             });
     }
 

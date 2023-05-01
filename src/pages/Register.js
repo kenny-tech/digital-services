@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Swal from 'sweetalert2';
 
 import { Link } from "react-router-dom";
 import Navigation from "../components/Navigation";
 import Error from "../components/Error";
 import { BASE_API_ROUTE, REGISTER_API_ROUTE } from "../Route";
+import { successAlert } from "../services/alert";
 
 const Register = () => {
 
@@ -52,11 +52,7 @@ const Register = () => {
 
             axios.post(`${BASE_API_ROUTE}${REGISTER_API_ROUTE}`, data)
               .then(function (response) {
-                Swal.fire(
-                    'Good job!',
-                    'Registration successful! An activation link has been sent to your email. Please click on the link to activate your account.',
-                    'success'
-                  )
+                successAlert('Registration successful! An activation link has been sent to your email. Please click on the link to activate your account.');
               })
               .catch(function (error) {
                 setErrors(error.response.data.errors);

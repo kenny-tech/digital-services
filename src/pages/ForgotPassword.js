@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Swal from 'sweetalert2';
 
 import { Link } from "react-router-dom";
 import Navigation from "../components/Navigation";
 import { BASE_API_ROUTE, FORGOT_PASSWORD_API_ROUTE } from "../Route";
+import { successAlert } from "../services/alert";
 
 const ForgotPassword = () => {
 
@@ -28,11 +28,7 @@ const ForgotPassword = () => {
             axios.post(`${BASE_API_ROUTE}${FORGOT_PASSWORD_API_ROUTE}`, data)
               .then(function (response) {
                 if(response.data.success === true) {
-                    Swal.fire(
-                        'Good job!',
-                        response.data.message,
-                        'success'
-                      )                
+                    successAlert(response.data.message);            
                 } else {
                     setError('Wrong email supplied.')
                 }      
