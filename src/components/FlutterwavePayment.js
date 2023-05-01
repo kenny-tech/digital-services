@@ -67,13 +67,24 @@ const FlutterwavePayment = ({ amount, phoneNumber, title, description, smartCard
             navigate(0);
         }
 
-        if (title === 'Pay Bills') {
+        if (title === 'Pay Bills' || title === 'Payment for Electricity' || title === 'Payment for Wifi') {
+            let customer;
+            if(title === 'Pay Bills') {
+                customer = smartCardNo;
+            }
+            if(title === 'Payment for Electricity') {
+                customer = meterNumber;
+            }
+            if(title === 'Payment for Wifi') {
+                customer = accountNumber;
+            }
+
             // Call the validateCustomer function
             (async () => {
                 try {
-                    const customerData = await validateCustomer(item_code, biller_code, smartCardNo);
+                    const customerData = await validateCustomer(item_code, biller_code, customer);
                     if (customerData && customerData.response_code === "00") {
-                        alert(`Renew subscription for ${smartCardNo} (${customerData.name})`);
+                        alert(`Payment for ${smartCardNo} (${customerData.name}). Amount - NGN${amount.toLocaleString()}`);
                         handleFlutterPayment({
                             callback: (response) => {
                 
@@ -124,8 +135,8 @@ const FlutterwavePayment = ({ amount, phoneNumber, title, description, smartCard
                             onClose: () => { },
                         });
                     } else {
-                        alert(`The Smart Card Number (${smartCardNo}) is not correct. Please check and try again.`);
-                        window.location.reload();
+                        alert(`The number (${customer}) is not correct. Please check and try again.`);
+                        navigate(0);
                     }
                 } catch (error) {
                     console.log('Error occurred while validating customer: ', error);
