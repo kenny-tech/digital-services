@@ -3,12 +3,12 @@ import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
 import { BASE_API_ROUTE, MAKE_PAYMENT_API_ROUTE, VERIFY_PAYMENT_API_ROUTE, VALIDATE_CUSTOMER_API_ROUTE } from "../Route";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { successAlert,  errorAlert} from "../services/alert";
+import { successAlert, errorAlert } from "../services/alert";
 
-const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardNo, item_code, biller_code, biller_name, meterNumber, accountNumber, customAmount}) => {
+const FlutterwavePayment = ({ amount, phoneNumber, title, description, smartCardNo, item_code, biller_code, biller_name, meterNumber, accountNumber, customAmount }) => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
-    let phone = '+234'+phoneNumber.substring(1);
+    let phone = '+234' + phoneNumber.substring(1);
 
     const usertoken = localStorage.getItem("token");
 
@@ -17,7 +17,7 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
         'Authorization': `Bearer ${usertoken}`
     }
 
-    if(title === 'Payment for Electricity') {
+    if (title === 'Payment for Electricity') {
         amount = customAmount;
     }
 
@@ -28,99 +28,110 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
         currency: 'NGN',
         payment_options: 'card,mobilemoney,ussd',
         customer: {
-          email: localStorage.getItem('email'),
-          phone_number: phone,
-          name: localStorage.getItem('name'),
+            email: localStorage.getItem('email'),
+            phone_number: phone,
+            name: localStorage.getItem('name'),
         },
         customizations: {
-          title: title,
-          description: description,
-          logo: 'https://digitalstore.cakamba.com/logo.jpeg',
+            title: title,
+            description: description,
+            logo: 'https://digitalstore.cakamba.com/logo.jpeg',
         },
     };
-    
+
     const handleFlutterPayment = useFlutterwave(config);
 
     const handleBuyNow = () => {
         setLoading(true);
-        if(phoneNumber.length !== 11 && (title === 'Buy Airtime' || title === 'Buy Data')) {
+        if (phoneNumber.length !== 11 && (title === 'Buy Airtime' || title === 'Buy Data')) {
             alert('Phone number cannot be blank and must be 11 digits.');
             setLoading(false);
             navigate(0);
-        } 
+        }
 
-        if(smartCardNo.length !== 10 && title === 'Pay Bills') {
+        if (smartCardNo.length !== 10 && title === 'Pay Bills') {
             alert('Smart card number cannot be blank and must be 10 digits.');
             setLoading(false);
             navigate(0);
-        } 
+        }
 
-        if(meterNumber.length === 0 && customAmount.length === 0 && title === 'Payment for Electricity') {
+        if (meterNumber.length === 0 && customAmount.length === 0 && title === 'Payment for Electricity') {
             alert('Meter number and Amount are both required');
             setLoading(false);
             navigate(0);
         }
 
-        if(accountNumber.length === 0 && title === 'Payment for Wifi') {
+        if (accountNumber.length === 0 && title === 'Payment for Wifi') {
             alert('Account Number is required');
             setLoading(false);
             navigate(0);
         }
 
-        if(title === 'Pay Bills') {
-            validateCustomer(item_code, biller_code, smartCardNo);
-        } 
-       
-        handleFlutterPayment({
-            callback: (response) => {
-                // console.log('Payment response: ',response);
-
-                let txref_data = {
-                    tx_ref: response.tx_ref,
-                }
-
-                // verify payment
-                axios.post(`${BASE_API_ROUTE}${VERIFY_PAYMENT_API_ROUTE}`, txref_data, {
-                    headers: headers
-                })
-                .then(function (response) {
-                    // if payment is successfully verified, save payment and recharge number
-                    console.log('Successful payment response : ', response);
-                    if(response.data.status === 'success') {
-                        let data = {
-                            payment_title: title,
-                            user_id: localStorage.getItem('user_id'),
-                            status: response.data.data.status,
-                            tx_ref: response.data.data.tx_ref,
-                            response_code: response.data.data.charge_response_code,
-                            amount: response.data.data.amount,
-                            flw_ref: response.data.data.flw_ref,
-                            transaction_id: response.data.data.transaction_id,
-                            currency: response.data.data.currency,
-                            payment_date: response.data.data.created_at,
-                            phone_number: phone,
-                            smart_card_number: smartCardNo,
-                            biller_name: biller_name,
-                            meter_number: meterNumber, 
-                            account_number: accountNumber
-                        }
-
-                        // console.log('Payment data: ', data);
-
-                        savePaymentAndRechargeNumber(data);
-                       
-                        closePaymentModal() // this will close the modal programmatically
+        if (title === 'Pay Bills') {
+            // Call the validateCustomer function
+            (async () => {
+                try {
+                    const customerData = await validateCustomer(item_code, biller_code, smartCardNo);
+                    if (customerData && customerData.response_code === "00") {
+                        alert(`Renew subscription for ${smartCardNo} (${customerData.name})`);
+                        handleFlutterPayment({
+                            callback: (response) => {
+                
+                                let txref_data = {
+                                    tx_ref: response.tx_ref,
+                                }
+                
+                                // verify payment
+                                axios.post(`${BASE_API_ROUTE}${VERIFY_PAYMENT_API_ROUTE}`, txref_data, {
+                                    headers: headers
+                                })
+                                    .then(function (response) {
+                                        // if payment is successfully verified, save payment and recharge number
+                                        console.log('Successful payment response : ', response);
+                                        if (response.data.status === 'success') {
+                                            let data = {
+                                                payment_title: title,
+                                                user_id: localStorage.getItem('user_id'),
+                                                status: response.data.data.status,
+                                                tx_ref: response.data.data.tx_ref,
+                                                response_code: response.data.data.charge_response_code,
+                                                amount: response.data.data.amount,
+                                                flw_ref: response.data.data.flw_ref,
+                                                transaction_id: response.data.data.transaction_id,
+                                                currency: response.data.data.currency,
+                                                payment_date: response.data.data.created_at,
+                                                phone_number: phone,
+                                                smart_card_number: smartCardNo,
+                                                biller_name: biller_name,
+                                                meter_number: meterNumber,
+                                                account_number: accountNumber
+                                            }
+                
+                                            // console.log('Payment data: ', data);
+                
+                                            savePaymentAndRechargeNumber(data);
+                
+                                            closePaymentModal() // this will close the modal programmatically
+                                        }
+                                        setLoading(false);
+                                    })
+                                    .catch(function (error) {
+                                        // console.log('Error payment : ',error);
+                                        setLoading(false);
+                                        errorAlert(error.response.data.message);
+                                    });
+                            },
+                            onClose: () => { },
+                        });
+                    } else {
+                        alert(`The Smart Card Number (${smartCardNo}) is not correct. Please check and try again.`);
+                        window.location.reload();
                     }
-                    setLoading(false);    
-                })
-                .catch(function (error) {
-                    // console.log('Error payment : ',error);
-                    setLoading(false);
-                    errorAlert(error.response.data.message);  
-                });
-            },
-            onClose: () => {},
-        });
+                } catch (error) {
+                    console.log('Error occurred while validating customer: ', error);
+                }
+            })();
+        }
     }
 
     const savePaymentAndRechargeNumber = (data) => {
@@ -128,38 +139,36 @@ const FlutterwavePayment = ({amount, phoneNumber, title, description, smartCardN
         axios.post(`${BASE_API_ROUTE}${MAKE_PAYMENT_API_ROUTE}`, data, {
             headers: headers
         })
-        .then(function (response) {  
-            successAlert('Payment successful');
-            setLoading(false);    
-        })
-        .catch(function (error) {
-            // console.log('Error: ',error);
-            errorAlert(error.response.data.message);
-            setLoading(false);
-        });
+            .then(function (response) {
+                successAlert('Payment successful');
+                setLoading(false);
+            })
+            .catch(function (error) {
+                // console.log('Error: ',error);
+                errorAlert(error.response.data.message);
+                setLoading(false);
+            });
     }
 
-    const validateCustomer = (item_code, biller_code, customer) => {
+    const validateCustomer = async (item_code, biller_code, customer) => {
         let data = {
             item_code,
             biller_code,
             customer
         }
 
-        // validate smart card number or phone number
-        axios.post(`${BASE_API_ROUTE}${VALIDATE_CUSTOMER_API_ROUTE}`, data, {
-            headers: headers
-        })
-        .then(function (response) {
-            console.log('Validate customer response: ',response);
-        })
-        .catch(function (error) {
-            console.log('Validate customer error: ',error);
+        try {
+            const response = await axios.post(`${BASE_API_ROUTE}${VALIDATE_CUSTOMER_API_ROUTE}`, data, {
+                headers: headers
+            });
+            return response.data.data;
+        } catch (error) {
+            console.log('Validate customer error: ', error);
             setLoading(false);
-            errorAlert(error.response.data.message);  
-            navigate(0);
-        });
-        
+            errorAlert(error.response.data.message);
+            throw error;
+        }
+
     }
 
     return (
