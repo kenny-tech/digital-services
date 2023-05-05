@@ -54,9 +54,9 @@ const Provider = () => {
                     <Link to="/selected-provider" state={{ networkName: "GoTv", type: "Bills" }}>
                         <Network name="GoTV" image="/gotv.png" />
                     </Link>
-                    {/* <Link to="/selected-provider" state={{ networkName: "StarTimes", type: "Bills" }}>
+                    <Link to="/selected-provider" state={{ networkName: "StarTimes", type: "Bills" }}>
                         <Network name="StarTimes" image="/startimes.jpeg" />
-                    </Link> */}
+                    </Link>
                 </div>) : (<></>)
                 }
                 

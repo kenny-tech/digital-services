@@ -356,12 +356,12 @@ const SelectedProvider = () => {
                             {
                                 isLoading ? <div><LoadingSpinner /></div> : (<div className="row ml-2">
                                     {
-                                        billerCategory && billerCategory.filter(item => (item.biller_name.split(" ")[0] === 'Startime' || item.biller_name.split(" ")[0] === 'STARTIMES') && item.country === 'NG').map(category => (
+                                        billerCategory && billerCategory.filter(item => (item.biller_code === 'BIL123') && item.country === 'NG').map(category => (
                                             <div className="col-md-4 mb-3" key={category.id}>
                                                 <div className="card bg-light" style={{ width: '22rem', height: '13rem' }}>
                                                     <div className="card-body">
                                                         <div className="d-flex justify-content-center mb-1">
-                                                            <img src={`/${networkName.toLowerCase()}.png`} className="img-fluid mx-auto rounded" width={40} height={40} alt="" />
+                                                            <img src={`/${networkName.toLowerCase()}.jpeg`} className="img-fluid mx-auto rounded" width={40} height={40} alt="" />
                                                         </div>
                                                         <h3 className="card-text text-center">NGN{category.amount.toLocaleString()}</h3>
                                                         {
