@@ -79,23 +79,23 @@ const Register = () => {
                             </ul>
                             <form onSubmit={handleSubmit}>
                                 <div className="form-group">
-                                    <label for="exampleInputEmail1">Name</label>
+                                    <label htmlFor="exampleInputEmail1">Name</label>
                                     <input type="text" className="form-control" placeholder="Full Name" name="name" onChange={event => setName(event.target.value)} value={name} />
                                     {nameError && name.length === 0 && <span className="text-danger">{nameError}</span>}
                                 </div>
                                 <div className="form-group">
-                                    <label for="exampleInputEmail1">Email address</label>
+                                    <label htmlFor="exampleInputEmail1">Email address</label>
                                     <input type="email" className="form-control" placeholder="Email Address" name="email" onChange={event => setEmail(event.target.value)} value={email} />
                                     {emailError && email.length === 0 && <span className="text-danger">{emailError}</span>}
                                 </div>
                                 <div className="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
+                                    <label htmlFor="exampleInputPassword1">Password</label>
                                     <input type="password" className="form-control" placeholder="Password" name="password" onChange={event => setPassword(event.target.value)} value={password} />
                                     {passwordError && password.length === 0 && <span className="text-danger">Password is required</span>}
                                     {passwordLenghError && password.length < 6 && <span className="text-danger">{passwordLenghError}</span>}
                                 </div>
                                 <div className="form-group">
-                                    <label for="exampleInputPassword1">Confirm Password</label>
+                                    <label htmlFor="exampleInputPassword1">Confirm Password</label>
                                     <input type="password" className="form-control" placeholder="Confirm Password" name="confirm_password" onChange={event => setConfirmPassword(event.target.value)} value={confirmPassword} />
                                     {confirmPasswordError && confirmPassword.length === 0 && <span className="text-danger">{confirmPasswordError}</span>}
                                     {confirmPasswordLenghError && confirmPassword.length < 6 && <span className="text-danger">{confirmPasswordLenghError}</span>}

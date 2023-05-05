@@ -54,7 +54,7 @@ const ForgotPassword = () => {
                             }
                             <form onSubmit={handleSubmit}>
                                 <div className="form-group">
-                                    <label for="exampleInputEmail1">Email address</label>
+                                    <label htmlFor="exampleInputEmail1">Email address</label>
                                     <input type="email" className="form-control" placeholder="Enter the email you used to register" onChange={event => setEmail(event.target.value)} value={email} />
                                     {emailError && email.length === 0 && <span className="text-danger">{emailError}</span>}
                                 </div>

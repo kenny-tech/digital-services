@@ -119,13 +119,13 @@ const ResetPassword = () => {
                                 email !== '' ? ( 
                                 <form onSubmit={handleSubmit}>
                                     <div className="form-group">
-                                        <label for="exampleInputPassword1">Password</label>
+                                        <label htmlFor="exampleInputPassword1">Password</label>
                                         <input type="password" className="form-control" placeholder="Password" name="password" onChange={event => setPassword(event.target.value)} value={password} />
                                         {passwordError && password.length === 0 && <span className="text-danger">Password is required</span>}
                                         {passwordLenghError && password.length < 6 && <span className="text-danger">{passwordLenghError}</span>}
                                     </div>
                                     <div className="form-group">
-                                        <label for="exampleInputPassword1">Confirm Password</label>
+                                        <label htmlFor="exampleInputPassword1">Confirm Password</label>
                                         <input type="password" className="form-control" placeholder="Confirm Password" name="confirm_password" onChange={event => setConfirmPassword(event.target.value)} value={confirmPassword} />
                                         {confirmPasswordError && confirmPassword.length === 0 && <span className="text-danger">{confirmPasswordError}<br/></span>}
                                         {confirmPasswordLenghError && confirmPassword.length < 6 && <span className="text-danger">{confirmPasswordLenghError}</span>}

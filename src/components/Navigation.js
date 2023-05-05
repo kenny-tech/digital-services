@@ -23,13 +23,13 @@ const Navigation = () => {
             <div className="collapse navbar-collapse justify-content-sm-end" id="navbarNavDropdown" >
                 <ul className="navbar-nav">
                     {
-                        sessionStorage.getItem('isLoggedIn') ? (<li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        sessionStorage.getItem('isLoggedIn') ? (<li className="nav-item dropdown">
+                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Account
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            {/* <a class="dropdown-item" style={{cursor: 'pointer'}} href="/profile">Profile</a> */}
-                            <a class="dropdown-item" style={{cursor: 'pointer'}} onClick={() => handleLogout()}>Log out</a>
+                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {/* <a className="dropdown-item" style={{cursor: 'pointer'}} href="/profile">Profile</a> */}
+                            <a className="dropdown-item" style={{cursor: 'pointer'}} onClick={() => handleLogout()}>Log out</a>
                         </div>
                     </li>) : (<>
                         <li className="nav-item">

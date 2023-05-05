@@ -122,11 +122,11 @@ const SelectedProvider = () => {
                 <div className="col-12 mb-3 ml-3">
                     {
                         type === 'Airtime' ? (<><div className="form-group">
-                            <label for="">{'Phone Number'}</label>
+                            <label htmlFor="">{'Phone Number'}</label>
                             <input type="number" max={11} className="form-control" style={{ width: '70%' }} id="" placeholder={'Phone number'} onChange={e => setPhoneNumber(e.target.value)} value={phoneNumber} required={true} />
                         </div>
                             <div className="form-group">
-                                <label for="type">{'Select whether Airtime or Data'}</label>
+                                <label htmlFor="type">{'Select whether Airtime or Data'}</label>
                                 <select className="form-control" name='type' style={{ width: '70%' }} onChange={(e) => handleAirtimeTypeChange(e)}>
                                     <option value={'Airtime'}>Airtime</option>
                                     <option value={'Data'}>Data</option>
@@ -136,24 +136,24 @@ const SelectedProvider = () => {
 
                     {
                         type === 'Bills' ? (<><div className="form-group">
-                            <label for="">{'Enter Smart Card Number'}</label>
+                            <label htmlFor="">{'Enter Smart Card Number'}</label>
                             <input type="number" max={11} className="form-control" style={{ width: '70%' }} id="" value={smartCardNo} placeholder={'Smart Card Number'} onChange={e => setSmartCardNo(e.target.value)} required={true} />
                         </div></>) : (<></>)
                     }
 
                     {
                         type === 'Electricity' ? (<><div className="form-group">
-                            <label for="">{'Enter Meter Number'}</label>
+                            <label htmlFor="">{'Enter Meter Number'}</label>
                             <input type="number" max={11} className="form-control" style={{ width: '70%' }} id="" placeholder={'Meter Number'} onChange={e => setMeterNumber(e.target.value)} value={meterNumber} required={true} />
                             <br />
-                            <label for="">{'Enter Amount'}</label>
+                            <label htmlFor="">{'Enter Amount'}</label>
                             <input type="amount" max={11} className="form-control" style={{ width: '70%' }} id="" placeholder={'Amount'} onChange={e => setCustomAmount(e.target.value)} value={customAmount} required={true} />
                         </div></>) : (<></>)
                     }
 
                     {   
                         type === 'Wifi' ? (<><div className="form-group">
-                            <label for="">{'Enter Account Number'}</label>
+                            <label htmlFor="">{'Enter Account Number'}</label>
                             <input type="number" max={11} className="form-control" style={{ width: '70%' }} id="" value={accountNumber} placeholder={'Account Number'} onChange={e => setAccountNumber(e.target.value)} required={true} />
                         </div></>) : (<></>)
                     }
@@ -166,7 +166,7 @@ const SelectedProvider = () => {
                                 {
                                     rechargeAmount.map(item => {
                                         return (
-                                            <div className="col-md-4 mb-3">
+                                            <div className="col-md-4 mb-3" key={item.id}>
                                                 <div className="card bg-light" style={{ width: '22rem', height: '13rem' }}>
                                                     <div className="card-body">
                                                         <div className="d-flex justify-content-center mb-1">
@@ -194,7 +194,7 @@ const SelectedProvider = () => {
                                     {
 
                                         billerCategory && billerCategory.filter(item => item.biller_code === 'BIL108').map(category => (
-                                            <div className="col-md-4 mb-3">
+                                            <div className="col-md-4 mb-3" key={category.id}>
                                                 <div className="card bg-light" style={{ width: '22rem', height: '13rem' }}>
                                                     <div className="card-body">
                                                         <div className="d-flex justify-content-center mb-1">
@@ -221,7 +221,7 @@ const SelectedProvider = () => {
                                     {
 
                                         billerCategory && billerCategory.filter(item => item.biller_code === 'BIL110').map(category => (
-                                            <div className="col-md-4 mb-3">
+                                            <div className="col-md-4 mb-3" key={category.id}>
                                                 <div className="card bg-light" style={{ width: '22rem', height: '13rem' }}>
                                                     <div className="card-body">
                                                         <div className="d-flex justify-content-center mb-1">
@@ -248,7 +248,7 @@ const SelectedProvider = () => {
                                     {
 
                                         billerCategory && billerCategory.filter(item => item.biller_code === 'BIL109').map(category => (
-                                            <div className="col-md-4 mb-3">
+                                            <div className="col-md-4 mb-3" key={category.id}>
                                                 <div className="card bg-light" style={{ width: '22rem', height: '13rem' }}>
                                                     <div className="card-body">
                                                         <div className="d-flex justify-content-center mb-1">
@@ -275,7 +275,7 @@ const SelectedProvider = () => {
                                     {
 
                                         billerCategory && billerCategory.filter(item => item.biller_code === 'BIL111').map(category => (
-                                            <div className="col-md-4 mb-3">
+                                            <div className="col-md-4 mb-3" key={category.id}>
                                                 <div className="card bg-light" style={{ width: '22rem', height: '13rem' }}>
                                                     <div className="card-body">
                                                         <div className="d-flex justify-content-center mb-1">
@@ -302,7 +302,7 @@ const SelectedProvider = () => {
                                     {
 
                                         billerCategory && billerCategory.filter(item => item.biller_name.split(" ")[0] === 'DSTV' && item.country === 'NG').map(category => (
-                                            <div className="col-md-4 mb-3">
+                                            <div className="col-md-4 mb-3" key={category.id}>
                                                 <div className="card bg-light" style={{ width: '22rem', height: '13rem' }}>
                                                     <div className="card-body">
                                                         <div className="d-flex justify-content-center mb-1">
@@ -329,7 +329,7 @@ const SelectedProvider = () => {
                                 isLoading ? <div><LoadingSpinner /></div> : (<div className="row ml-2">
                                     {
                                         billerCategory && billerCategory.filter(item => (item.biller_name.split(" ")[0] === 'GOTV' || item.biller_name.split(" ")[0] === 'GOtv') && item.country === 'NG').map(category => (
-                                            <div className="col-md-4 mb-3">
+                                            <div className="col-md-4 mb-3" key={category.id}>
                                                 <div className="card bg-light" style={{ width: '22rem', height: '13rem' }}>
                                                     <div className="card-body">
                                                         <div className="d-flex justify-content-center mb-1">
@@ -357,7 +357,7 @@ const SelectedProvider = () => {
                                 isLoading ? <div><LoadingSpinner /></div> : (<div className="row ml-2">
                                     {
                                         billerCategory && billerCategory.filter(item => (item.biller_name.split(" ")[0] === 'Startime' || item.biller_name.split(" ")[0] === 'STARTIMES') && item.country === 'NG').map(category => (
-                                            <div className="col-md-4 mb-3">
+                                            <div className="col-md-4 mb-3" key={category.id}>
                                                 <div className="card bg-light" style={{ width: '22rem', height: '13rem' }}>
                                                     <div className="card-body">
                                                         <div className="d-flex justify-content-center mb-1">
@@ -385,7 +385,7 @@ const SelectedProvider = () => {
                                 isLoading ? <div><LoadingSpinner /></div> : (<div className="row ml-2">
                                     {
                                         billerCategory && billerCategory.filter(item => (item.label_name.split(" ")[0] === 'Meter') && item.country === 'NG').map(category => (
-                                            <div className="col-md-4 mb-3">
+                                            <div className="col-md-4 mb-3" key={category.id}>
                                                 <div className="card bg-light" style={{ width: '22rem', height: '13rem' }}>
                                                     <div className="card-body">
                                                         <div className="d-flex justify-content-center mb-3">
@@ -412,7 +412,7 @@ const SelectedProvider = () => {
                                 isLoading ? <div><LoadingSpinner /></div> : (<div className="row ml-2">
                                     {
                                         billerCategory && billerCategory.filter(item => (item.biller_name.split(" ")[0] === 'SMILE' || item.biller_name.split(" ")[0] === 'Smile') && item.country === 'NG').map(category => (
-                                            <div className="col-md-4 mb-3">
+                                            <div className="col-md-4 mb-3" key={category.id}>
                                                 <div className="card bg-light" style={{ width: '22rem', height: '13rem' }}>
                                                     <div className="card-body">
                                                         <div className="d-flex justify-content-center mb-1">
@@ -440,7 +440,7 @@ const SelectedProvider = () => {
                                 isLoading ? <div><LoadingSpinner /></div> : (<div className="row ml-2">
                                     {
                                         billerCategory && billerCategory.filter(item => (item.biller_name.split(" ")[0] === 'ipNX') && item.country === 'NG').map(category => (
-                                            <div className="col-md-4 mb-3">
+                                            <div className="col-md-4 mb-3" key={category.id}>
                                                 <div className="card bg-light" style={{ width: '22rem', height: '13rem' }}>
                                                     <div className="card-body">
                                                         <div className="d-flex justify-content-center mb-1">

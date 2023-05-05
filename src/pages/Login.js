@@ -67,12 +67,12 @@ const Login = () => {
                             }
                             <form onSubmit={handleSubmit}>
                                 <div className="form-group">
-                                    <label for="exampleInputEmail1">Email address</label>
+                                    <label htmlFor="exampleInputEmail1">Email address</label>
                                     <input type="email" className="form-control" placeholder="Enter email" onChange={event => setEmail(event.target.value)} value={email} />
                                     {emailError && email.length === 0 && <span className="text-danger">{emailError}</span>}
                                 </div>
                                 <div className="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
+                                    <label htmlFor="exampleInputPassword1">Password</label>
                                     <input type="password" className="form-control" placeholder="Password" onChange={event => setPassword(event.target.value)} value={password} />
                                     {passwordError && password.length === 0 && <span className="text-danger">Password is required</span>}
                                 </div>
